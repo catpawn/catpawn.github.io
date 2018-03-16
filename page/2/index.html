@@ -5,20 +5,14 @@
   
 
   
-  <title>Bamboofox2017-tiny-git | CatPawn</title>
+  <title>CatPawn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Questionhttp://bamboofox.cs.nctu.edu.tw:53838 Solution見佢個名叫 tiny git , 咁就更係即刻用 gitHack 試下佢先啦1python GitHack.py http://bamboofox.cs.nctu.edu.tw:53838  之後入番個directory睇log1git log 之後就會睇到條flag">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Bamboofox2017-tiny-git">
-<meta property="og:url" content="https://catpawn.github.io/2018/01/01/Bamboofox2017-tiny-git/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="CatPawn">
+<meta property="og:url" content="https://catpawn.github.io/page/2/index.html">
 <meta property="og:site_name" content="CatPawn">
-<meta property="og:description" content="Questionhttp://bamboofox.cs.nctu.edu.tw:53838 Solution見佢個名叫 tiny git , 咁就更係即刻用 gitHack 試下佢先啦1python GitHack.py http://bamboofox.cs.nctu.edu.tw:53838  之後入番個directory睇log1git log 之後就會睇到條flag">
-<meta property="og:image" content="https://catpawn.github.io/2018/01/01/Bamboofox2017-tiny-git/img1.png">
-<meta property="og:updated_time" content="2018-01-01T09:58:59.473Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bamboofox2017-tiny-git">
-<meta name="twitter:description" content="Questionhttp://bamboofox.cs.nctu.edu.tw:53838 Solution見佢個名叫 tiny git , 咁就更係即刻用 gitHack 試下佢先啦1python GitHack.py http://bamboofox.cs.nctu.edu.tw:53838  之後入番個directory睇log1git log 之後就會睇到條flag">
-<meta name="twitter:image" content="https://catpawn.github.io/2018/01/01/Bamboofox2017-tiny-git/img1.png">
+<meta name="twitter:title" content="CatPawn">
   
     <link rel="alternate" href="/atom.xml" title="CatPawn" type="application/atom+xml">
   
@@ -65,10 +59,12 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Bamboofox2017-tiny-git" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-BambooFox-app" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/01/01/Bamboofox2017-tiny-git/" class="article-date">
-  <time datetime="2018-01-01T09:32:59.000Z" itemprop="datePublished">2018-01-01</time>
+    <a href="/2017/12/31/BambooFox-app/" class="article-date">
+  <time datetime="2017-12-31T10:38:03.000Z" itemprop="datePublished">2017-12-31</time>
 </a>
     
   </div>
@@ -78,8 +74,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Bamboofox2017-tiny-git
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/31/BambooFox-app/">BambooFox-app</a>
     </h1>
   
 
@@ -87,43 +83,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="http://bamboofox.cs.nctu.edu.tw:53838" target="_blank" rel="noopener">http://bamboofox.cs.nctu.edu.tw:53838</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>見佢個名叫 tiny git , 咁就更係即刻用 gitHack 試下佢先啦<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python GitHack.py http://bamboofox.cs.nctu.edu.tw:53838</span><br></pre></td></tr></table></figure></p>
-<p><img src="img1.png" alt=""></p>
-<p>之後入番個directory睇log<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure></p>
-<p>之後就會睇到條flag</p>
-
+        <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
+<li><p>將apk放去 <a href="http://www.javadecompilers.com/apk" target="_blank" rel="noopener">http://www.javadecompilers.com/apk</a> decompile</p>
+</li>
+<li><p>睇番個目錄見到有個folder叫 appinventor , 好似幾有趣 , lets see~</p>
+</li>
+</ol>
+<p><img src="img1.png"></p>
+<ol>
+<li>最後係 \appinventor\ai_ss8651twtw\BambooFox\Screen1.java 搵到<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object Button1$Click() &#123;</span><br><span class="line">	runtime.setThisForm();</span><br><span class="line">    <span class="keyword">if</span> (runtime.callYailPrimitive(Scheme.numGEq, LList.list2(runtime.lookupGlobalVarInCurrentFormEnvironment(Lit3, runtime.$Stthe$Mnnull$Mnvalue$St), Lit21), Lit22, <span class="string">"&gt;="</span>) != Boolean.FALSE) &#123;</span><br><span class="line">    	runtime.setAndCoerceProperty$Ex(Lit19, Lit23, Boolean.FALSE, Lit24);</span><br><span class="line">        runtime.setAndCoerceProperty$Ex(Lit19, Lit16, <span class="string">"QkFNQk9PRk9Ye2phVmFfNFBQX2k1X2VhU3lfdDBfRDNjMG1waTFlfQ=="</span>, Lit9);</span><br><span class="line">        <span class="keyword">return</span> runtime.callComponentMethod(Lit25, Lit26, LList.list1(<span class="string">"Flag in somewhere"</span>), Lit27);</span><br><span class="line">    &#125;</span><br><span class="line">    runtime.callComponentMethod(Lit25, Lit26, LList.list1(<span class="string">"Try harder!!!"</span>), Lit28);</span><br><span class="line">    <span class="keyword">return</span> runtime.addGlobalVarToCurrentFormEnvironment(Lit3, runtime.callYailPrimitive(AddOp.$Pl, LList.list2(runtime.lookupGlobalVarInCurrentFormEnvironment(Lit3, runtime.$Stthe$Mnnull$Mnvalue$St), Lit29), Lit30, <span class="string">"+"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>4.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">print</span> base64.b64decode(<span class="string">"QkFNQk9PRk9Ye2phVmFfNFBQX2k1X2VhU3lfdDBfRDNjMG1waTFlfQ=="</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BAMBOOFOX&#123;jaVa_4PP_i5_eaSy_t0_D3c0mpi1e&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-tiny-git/" data-id="cjetu1x6l00066ww5n747fbea" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2017/12/31/BambooFox-app/" data-id="cjetu1x6800006ww5if4suggc" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2018/01/01/tiny-docker-SSRF/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          BamboofoxCTF2017-tiny-docker-SSRF
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/01/01/Bamboofox2017-net-packet/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Bamboofox2017-net-packet</div>
-    </a>
-  
-</nav>
+</article>
+
 
   
-</article>
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 </section>
         

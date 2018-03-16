@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="CatPawn">
-<meta property="og:url" content="catpawn.github.io/index.html">
+<meta property="og:url" content="https://catpawn.github.io/index.html">
 <meta property="og:site_name" content="CatPawn">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CatPawn">
@@ -53,13 +53,53 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="catpawn.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
       </div>
     </div>
   </div>
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-PragyanCTF2018-Scientists-research" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/16/PragyanCTF2018-Scientists-research/" class="article-date">
+  <time datetime="2018-03-16T10:56:38.000Z" itemprop="datePublished">2018-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/16/PragyanCTF2018-Scientists-research/">PragyanCTF2018-Scientists-research</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Excel"><a href="#Excel" class="headerlink" title="Excel"></a>Excel</h3><p><a href="observations.xlsx">observations.xlsx</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>就咁睇全部格都係裝住一個6位既數字 , 估計可能係color code黎 , 所以直接寫條script轉番每一格做顏色</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xlrd <span class="keyword">import</span> open_workbook</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image </span><br><span class="line"></span><br><span class="line">wb = open_workbook(<span class="string">'observations.xlsx'</span>)</span><br><span class="line"><span class="keyword">for</span> sheet <span class="keyword">in</span> wb.sheets():</span><br><span class="line">	number_of_rows = sheet.nrows</span><br><span class="line">	number_of_columns = sheet.ncols</span><br><span class="line">	flagImage = Image.new(<span class="string">'RGB'</span>, (number_of_columns,number_of_rows))</span><br><span class="line">	<span class="keyword">for</span> row <span class="keyword">in</span> range(<span class="number">1</span>, number_of_rows):</span><br><span class="line">		<span class="keyword">for</span> col <span class="keyword">in</span> range(number_of_columns):</span><br><span class="line">			value = str(hex(int(str(sheet.cell(row,col).value)[:<span class="number">-2</span>]))[<span class="number">2</span>:]).zfill(<span class="number">6</span>)</span><br><span class="line">			rgb = tuple(int(value[i:i+<span class="number">2</span>], <span class="number">16</span>) <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">0</span>, <span class="number">2</span> ,<span class="number">4</span>))</span><br><span class="line">			flagImage.putpixel((row,col),rgb)</span><br><span class="line">flagImage.save(<span class="string">"flag.png"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><p><img src="flag.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/03/16/PragyanCTF2018-Scientists-research/" data-id="cjetu1x6n00076ww5q078gvr2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Bamboofox2017-suck-file" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -94,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="catpawn.github.io/2018/01/01/Bamboofox2017-suck-file/" data-id="cjbw1o61l0007xww544wzkaw4" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-suck-file/" data-id="cjetu1x6i00046ww51wvbbehw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -138,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="catpawn.github.io/2018/01/01/tiny-docker-SSRF/" data-id="cjbw1blrx0006xww5gpwj6xbn" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/tiny-docker-SSRF/" data-id="cjetu1x6p00096ww55f387eq6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -179,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="catpawn.github.io/2018/01/01/Bamboofox2017-tiny-git/" data-id="cjbw0bja00005xww53ov7adp9" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-tiny-git/" data-id="cjetu1x6l00066ww5n747fbea" class="article-share-link">Share</a>
       
       
     </footer>
@@ -220,7 +260,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="catpawn.github.io/2018/01/01/Bamboofox2017-net-packet/" data-id="cjbw00h7m0003xww5x7wjmle5" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-net-packet/" data-id="cjetu1x6k00056ww5o7xlo5vd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -269,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="catpawn.github.io/2018/01/01/Bamboofox2017-little-asm-revenge/" data-id="cjbvzlkr20002xww5bncuo520" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-little-asm-revenge/" data-id="cjetu1x6c00016ww5vs6sl4d4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -316,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="catpawn.github.io/2018/01/01/Bamboofox2017-little-asm/" data-id="cjbvz2riw0001xww5yzl9whvz" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-little-asm/" data-id="cjetu1x6e00026ww5crv231ww" class="article-share-link">Share</a>
       
       
     </footer>
@@ -366,7 +406,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="catpawn.github.io/2018/01/01/Bamboofox2017-water-impossible/" data-id="cjbvy1ato0000xww5wlnt3bct" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-water-impossible/" data-id="cjetu1x6q000a6ww5saoulowv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -406,7 +446,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="catpawn.github.io/2017/12/31/Bamboofox2017-toddler-notakto-revenge/" data-id="cjbuoczyn0003row5kyb31u24" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2017/12/31/Bamboofox2017-toddler-notakto-revenge/" data-id="cjetu1x6o00086ww5ja587hvf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -453,55 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="catpawn.github.io/2017/12/31/Bamboofox2017-tiny-strings-crypto/" data-id="cjbuoczyk0001row50pycg9rs" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-BambooFox-app" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/31/BambooFox-app/" class="article-date">
-  <time datetime="2017-12-31T10:38:03.000Z" itemprop="datePublished">2017-12-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/31/BambooFox-app/">BambooFox-app</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>將apk放去 <a href="http://www.javadecompilers.com/apk" target="_blank" rel="noopener">http://www.javadecompilers.com/apk</a> decompile</p>
-</li>
-<li><p>睇番個目錄見到有個folder叫 appinventor , 好似幾有趣 , lets see~</p>
-</li>
-</ol>
-<p><img src="img1.png"></p>
-<ol>
-<li>最後係 \appinventor\ai_ss8651twtw\BambooFox\Screen1.java 搵到<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object Button1$Click() &#123;</span><br><span class="line">	runtime.setThisForm();</span><br><span class="line">    <span class="keyword">if</span> (runtime.callYailPrimitive(Scheme.numGEq, LList.list2(runtime.lookupGlobalVarInCurrentFormEnvironment(Lit3, runtime.$Stthe$Mnnull$Mnvalue$St), Lit21), Lit22, <span class="string">"&gt;="</span>) != Boolean.FALSE) &#123;</span><br><span class="line">    	runtime.setAndCoerceProperty$Ex(Lit19, Lit23, Boolean.FALSE, Lit24);</span><br><span class="line">        runtime.setAndCoerceProperty$Ex(Lit19, Lit16, <span class="string">"QkFNQk9PRk9Ye2phVmFfNFBQX2k1X2VhU3lfdDBfRDNjMG1waTFlfQ=="</span>, Lit9);</span><br><span class="line">        <span class="keyword">return</span> runtime.callComponentMethod(Lit25, Lit26, LList.list1(<span class="string">"Flag in somewhere"</span>), Lit27);</span><br><span class="line">    &#125;</span><br><span class="line">    runtime.callComponentMethod(Lit25, Lit26, LList.list1(<span class="string">"Try harder!!!"</span>), Lit28);</span><br><span class="line">    <span class="keyword">return</span> runtime.addGlobalVarToCurrentFormEnvironment(Lit3, runtime.callYailPrimitive(AddOp.$Pl, LList.list2(runtime.lookupGlobalVarInCurrentFormEnvironment(Lit3, runtime.$Stthe$Mnnull$Mnvalue$St), Lit29), Lit30, <span class="string">"+"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>4.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">print</span> base64.b64decode(<span class="string">"QkFNQk9PRk9Ye2phVmFfNFBQX2k1X2VhU3lfdDBfRDNjMG1waTFlfQ=="</span>)</span><br></pre></td></tr></table></figure></p>
-<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BAMBOOFOX&#123;jaVa_4PP_i5_eaSy_t0_D3c0mpi1e&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="catpawn.github.io/2017/12/31/BambooFox-app/" data-id="cjbuoczym0002row5q4v7cl1x" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2017/12/31/Bamboofox2017-tiny-strings-crypto/" data-id="cjetu1x6g00036ww5hruuinko" class="article-share-link">Share</a>
       
       
     </footer>
@@ -512,6 +504,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -529,7 +526,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
   </div>
 
@@ -540,6 +537,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/03/16/PragyanCTF2018-Scientists-research/">PragyanCTF2018-Scientists-research</a>
+          </li>
         
           <li>
             <a href="/2018/01/01/Bamboofox2017-suck-file/">Bamboofox2017-suck-file</a>
@@ -555,10 +556,6 @@
         
           <li>
             <a href="/2018/01/01/Bamboofox2017-net-packet/">Bamboofox2017-net-packet</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/01/Bamboofox2017-little-asm-revenge/">Bamboofox2017-little-asm-revenge</a>
           </li>
         
       </ul>
