@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
@@ -60,6 +60,53 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-NeverLanCTF2018-Turtles-All-The-Way-Down" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/" class="article-date">
+  <time datetime="2018-03-16T11:10:44.000Z" itemprop="datePublished">2018-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/">NeverLanCTF2018-Turtles-All-The-Way-Down</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="turtle">turtle</a></p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>就咁睇似係base64 encoded<br><img src="img1.png" alt=""></p>
+<p>所以第一步就解左佢先啦<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">enc = open(<span class="string">"C:/Users/Admin/Desktop/turtle"</span>,<span class="string">"rb"</span>).read()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"C:/Users/Admin/Desktop/turtle.dec"</span>,<span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(base64.b64decode(enc))</span><br><span class="line">	f.close()</span><br></pre></td></tr></table></figure></p>
+<p>解完出黎係堆咁既野<br><img src="img2.png" alt=""></p>
+<p>但係我要既野正係中間果堆hex, 咁用sublime text處理下先啦<br>第一步 , 唔要頭果堆hex address<br><img src="img3.png" alt=""></p>
+<p>然後唔要埋尾果堆<br><img src="img4.png" alt=""></p>
+<p>最後就係replace晒d空格同埋換行就可以直接變番做binary<br>效果:<br><img src="img5.png" alt=""></p>
+<p>睇番個header應該係gzip黎 , 試下直接unzip佢先<br>可能因為係windows機啦 , unzip完出黎有個paxHeader係到 , 直接del到 0x400應該就開到<br><img src="img6.png" alt=""></p>
+<p>用file名開頭 , 應該係tar黎啦 , 直接unzip完終於出到個疑似係binary既野<br><img src="img7.png" alt=""></p>
+<p>但係似乎個header變晒做0x00 , 試下人手加番落去 , 然後終於decompile到<br><img src="img8.png" alt=""></p>
+<p>試下直接decode呢堆疑似hex既野啦<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">enc = [<span class="string">'584867774d5678344e6a42636544686d'</span>,<span class="string">'5848686c4d6c78344d545a6365475a6d'</span>,<span class="string">'584867795a6c78345a54466365444977'</span>,<span class="string">'584867794d6c78344e7a6c6365445132'</span>,<span class="string">'584867775a5678344d7a466365444178'</span>,<span class="string">'584867794d4678344d44526365444933'</span>,<span class="string">'584867774d5678345a475a6365444930'</span>,<span class="string">'58486778596c78344d6a42636544466a'</span>,<span class="string">'584867774d5678344d6a646365444178'</span>,<span class="string">'5848686b5a6c78344e6a5a6365445a6a'</span>,<span class="string">'584867324d5678344e6a646365446469'</span>,<span class="string">'58486732593178344e7a566365445930'</span>,<span class="string">'584867794d5678344e7a4a6365445a6d'</span>,<span class="string">'584867324d3178344e6d4a636544637a'</span>,<span class="string">'584867315a6c78344e6a466365445a6a'</span>,<span class="string">'58486732593178344e575a6365446330'</span>,<span class="string">'584867324f4678344e6a56636544566d'</span>,<span class="string">'584867334e3178344e6a466365446335'</span>,<span class="string">'584867315a6c78344e7a566365446377'</span>,<span class="string">'584867794d5678344e32526365444268'</span>]</span><br><span class="line">out = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> enc:</span><br><span class="line">	out += base64.b64decode(i.decode(<span class="string">'hex'</span>)).replace(<span class="string">"\\x"</span>,<span class="string">""</span>).decode(<span class="string">'hex'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> out</span><br></pre></td></tr></table></figure></p>
+<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;lud!rocks_all_the_way_up!&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/" data-id="cjetvs9hm0009dgw57e7mdimd" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-PragyanCTF2018-Scientists-research" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -91,7 +138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/03/16/PragyanCTF2018-Scientists-research/" data-id="cjetu1x6n00076ww5q078gvr2" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/03/16/PragyanCTF2018-Scientists-research/" data-id="cjetvs9hl0008dgw5ydadaof3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -134,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-suck-file/" data-id="cjetu1x6i00046ww51wvbbehw" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-suck-file/" data-id="cjetvs9hh0004dgw58qzphvwg" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -178,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/tiny-docker-SSRF/" data-id="cjetu1x6p00096ww55f387eq6" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/tiny-docker-SSRF/" data-id="cjetvs9hn000bdgw55t6v93u0" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -219,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-tiny-git/" data-id="cjetu1x6l00066ww5n747fbea" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-tiny-git/" data-id="cjetvs9hk0007dgw5tj1an5sh" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -260,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-net-packet/" data-id="cjetu1x6k00056ww5o7xlo5vd" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-net-packet/" data-id="cjetvs9gp0002dgw5tc7bga4h" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -309,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-little-asm-revenge/" data-id="cjetu1x6c00016ww5vs6sl4d4" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-little-asm-revenge/" data-id="cjetvs9gn0001dgw5ijh6bmwm" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -356,7 +403,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-little-asm/" data-id="cjetu1x6e00026ww5crv231ww" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-little-asm/" data-id="cjetvs9gr0003dgw519qcpmh3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -406,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-water-impossible/" data-id="cjetu1x6q000a6ww5saoulowv" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-water-impossible/" data-id="cjetvs9hj0006dgw5t2xpq3xy" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -446,54 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2017/12/31/Bamboofox2017-toddler-notakto-revenge/" data-id="cjetu1x6o00086ww5ja587hvf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bamboofox2017-tiny-strings-crypto" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/31/Bamboofox2017-tiny-strings-crypto/" class="article-date">
-  <time datetime="2017-12-31T10:51:06.000Z" itemprop="datePublished">2017-12-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/31/Bamboofox2017-tiny-strings-crypto/">Bamboofox2017-tiny-strings-crypto</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><p><img src="strings-crypto.jpg" alt=""></p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><ol>
-<li><p>見到佢題目話strings , 咁更係第一時間strings下佢</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings strings-crypto.jpg</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>點知比我搵到呢抽野 , 直接可以做 Decryption</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cipher:95060BD54E0AA82E2D7842E136AA9BEA414FA71AF2A282245</span><br><span class="line">key:XOFOOBAM</span><br><span class="line">DES-CBC</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><img src="img1.png" alt=""></p>
-<p>###Flag<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BAMBOOFOX&#123;51mPIepIC&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2017/12/31/Bamboofox2017-tiny-strings-crypto/" data-id="cjetu1x6g00036ww5hruuinko" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2017/12/31/Bamboofox2017-toddler-notakto-revenge/" data-id="cjetvs9hn000adgw5cdsf8idj" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -507,7 +507,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -524,7 +524,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -534,9 +534,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/">NeverLanCTF2018-Turtles-All-The-Way-Down</a>
+          </li>
         
           <li>
             <a href="/2018/03/16/PragyanCTF2018-Scientists-research/">PragyanCTF2018-Scientists-research</a>
@@ -552,10 +556,6 @@
         
           <li>
             <a href="/2018/01/01/Bamboofox2017-tiny-git/">Bamboofox2017-tiny-git</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/01/Bamboofox2017-net-packet/">Bamboofox2017-net-packet</a>
           </li>
         
       </ul>
