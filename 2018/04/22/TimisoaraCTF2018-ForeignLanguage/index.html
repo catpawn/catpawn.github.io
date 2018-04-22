@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>TimisoaraCTF2018-ForeignLanguage | CatPawn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Question1234Here&amp;apos;s one of my favorite words:da&amp;#125;&amp;#125;rilwwe00yt____mfotfysf__11ty11mg__lphyer__tyrt33__algv33uc44nrgely44ys____mvozfpsw__11tv11mf&amp;#123;&amp;#123;letsfmmgcutbicDownload: [haforli.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TimisoaraCTF2018-ForeignLanguage">
+<meta property="og:url" content="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-ForeignLanguage/index.html">
+<meta property="og:site_name" content="CatPawn">
+<meta property="og:description" content="Question1234Here&amp;apos;s one of my favorite words:da&amp;#125;&amp;#125;rilwwe00yt____mfotfysf__11ty11mg__lphyer__tyrt33__algv33uc44nrgely44ys____mvozfpsw__11tv11mf&amp;#123;&amp;#123;letsfmmgcutbicDownload: [haforli.">
+<meta property="og:updated_time" content="2018-04-22T15:07:31.427Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TimisoaraCTF2018-ForeignLanguage">
+<meta name="twitter:description" content="Question1234Here&amp;apos;s one of my favorite words:da&amp;#125;&amp;#125;rilwwe00yt____mfotfysf__11ty11mg__lphyer__tyrt33__algv33uc44nrgely44ys____mvozfpsw__11tv11mf&amp;#123;&amp;#123;letsfmmgcutbicDownload: [haforli.">
+  
+    <link rel="alternate" href="/atom.xml" title="CatPawn" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CatPawn</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-TimisoaraCTF2018-ForeignLanguage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/" class="article-date">
+  <time datetime="2018-04-22T14:51:47.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TimisoaraCTF2018-ForeignLanguage
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Here&apos;s one of my favorite words:</span><br><span class="line">da&#125;&#125;rilwwe00yt____mfotfysf__11ty11mg__lphyer__tyrt33__algv33uc44nrgely44ys____mvozfpsw__11tv11mf&#123;&#123;letsfmmgcutbic</span><br><span class="line"></span><br><span class="line">Download: [haforli.zip](haforli.zip)</span><br></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>一爆開個zip見到有好多python dependency, 咁應該係python script但係用exe pack起左。<br>直接unpack佢先<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 python_exe_unpack.py ./haforli.exe</span><br></pre></td></tr></table></figure></p>
+<p>然後拎到個script (原本條script唔係咁既 , d variable用晒oOOooOOooo之類 , 下面係我改過之後既版本)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"># uncompyle6 version 2.11.5</span><br><span class="line"># Python bytecode 3.4 (3310)</span><br><span class="line"># Decompiled from: Python 3.4.4 (default, Jan  5 2016, 15:35:18) </span><br><span class="line"># [GCC 5.3.1 20160101]</span><br><span class="line"># Embedded file name: haforli.py</span><br><span class="line"># Compiled at: 2018-04-19 10:18:21</span><br><span class="line"># Size of source mod 2**32: 198 bytes</span><br><span class="line"></span><br><span class="line">import sys</span><br><span class="line">import random</span><br><span class="line">import string</span><br><span class="line"></span><br><span class="line">welcomeText = &quot;\n\n              __            _ _ \n  /\\  /\\__ _ / _| ___  _ __| (_)\n / /_/ / _` | |_ / _ \\| &apos;__| | |\n/ __  / (_| |  _| (_) | |  | | |\n\\/ /_/ \\__,_|_|  \\___/|_|  |_|_|\n                                \n&quot;</span><br><span class="line"></span><br><span class="line">ooOO00oOo = lambda OOOo0: (True if len(OOOo0) % 2 == 1 else False)</span><br><span class="line"></span><br><span class="line">def o0O():</span><br><span class="line">    print(&apos;Input an English word to be translated into a Haforli word: &apos;)</span><br><span class="line">    inputWord = raw_input().strip().split(&apos; &apos;)[0]</span><br><span class="line">    reversedWord = inputWord[::-1]</span><br><span class="line">    Ooo = &apos;&apos;</span><br><span class="line">    o0oOoO00o = len(reversedWord) - 1 if ooOO00oOo(reversedWord) else len(reversedWord)</span><br><span class="line">    print o0oOoO00o</span><br><span class="line">    for i in range(0, o0oOoO00o, 2):</span><br><span class="line">        Ooo += reversedWord[i + 1] + reversedWord[i]</span><br><span class="line"></span><br><span class="line">    if ooOO00oOo(reversedWord):</span><br><span class="line">        Ooo += reversedWord[-1]</span><br><span class="line">    print Ooo</span><br><span class="line">    output = &apos;&apos;</span><br><span class="line">    for s in Ooo:</span><br><span class="line">        if not s.isalpha():</span><br><span class="line">            output += s + s</span><br><span class="line">        elif s.isupper():</span><br><span class="line">            output += s + random.choice(string.ascii_uppercase)</span><br><span class="line">        else:</span><br><span class="line">            output += s + random.choice(string.ascii_lowercase)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    print(&apos;Your translated word: &#123;0&#125;&apos;.format(output))</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    print(welcomeText)</span><br><span class="line">    o0O()</span><br></pre></td></tr></table></figure></p>
+<p>咁就睇應該都係可逆既 , 所以就寫左下面條script解<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(enc)</span>:</span></span><br><span class="line">    enc = enc[::<span class="number">-1</span>]</span><br><span class="line">    tmp = <span class="string">""</span></span><br><span class="line">    out = <span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(enc), <span class="number">2</span>):</span><br><span class="line">        tmp += enc[i]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(tmp), <span class="number">2</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            out += tmp[i+<span class="number">1</span>] + tmp[i]</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            out += tmp[i]</span><br><span class="line">    <span class="keyword">return</span> out</span><br><span class="line"><span class="keyword">print</span> decrypt(<span class="string">"da&#125;&#125;rilwwe00yt____mfotfysf__11ty11mg__lphyer__tyrt33__algv33uc44nrgely44ys____mvozfpsw__11tv11mf&#123;&#123;letsfmmgcutbic"</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timctf&#123;l1m1ts_of_my_l4ngu4g3_ar3_the_l1m1ts_of_my_w0rld&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-ForeignLanguage/" data-id="cjgaye6ls000bfkw5aux4sn7n" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nuevo</strong>
+      <div class="article-nav-title">
+        
+          TimisoaraCTF2018-Pshchology
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/22/TimisoaraCTF2018-Attendance/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Viejo</strong>
+      <div class="article-nav-title">TimisoaraCTF2018-Attendance</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archivos</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Posts recientes</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/">TimisoaraCTF2018-ForeignLanguage</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-Attendance/">TimisoaraCTF2018-Attendance</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-cparty/">TimisoaraCTF2018-cparty</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/">TimisoaraCTF2018-NotYourAverageRSA</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CatPawn<br>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

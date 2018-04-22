@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>TimisoaraCTF2018-NotYourAverageRSA | CatPawn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Question12c: 2031862365927713378443686340515935099445788767434303946421766259516954715525216270775786037390459155888010290886513931716164289818884355248574955642817137419043611630899384307874661809797">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TimisoaraCTF2018-NotYourAverageRSA">
+<meta property="og:url" content="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/index.html">
+<meta property="og:site_name" content="CatPawn">
+<meta property="og:description" content="Question12c: 2031862365927713378443686340515935099445788767434303946421766259516954715525216270775786037390459155888010290886513931716164289818884355248574955642817137419043611630899384307874661809797">
+<meta property="og:updated_time" content="2018-04-22T14:38:08.726Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TimisoaraCTF2018-NotYourAverageRSA">
+<meta name="twitter:description" content="Question12c: 2031862365927713378443686340515935099445788767434303946421766259516954715525216270775786037390459155888010290886513931716164289818884355248574955642817137419043611630899384307874661809797">
+  
+    <link rel="alternate" href="/atom.xml" title="CatPawn" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CatPawn</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-TimisoaraCTF2018-NotYourAverageRSA" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/" class="article-date">
+  <time datetime="2018-04-22T14:22:11.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TimisoaraCTF2018-NotYourAverageRSA
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c: 20318623659277133784436863405159350994457887674343039464217662595169547155252162707757860373904591558880102908865139317161642898188843552485749556428171374190436116308993843078746618097974105761149153341729931060530612128761115767471801348290177493316532913006382242873832659641556157675014368433683567068217</span><br><span class="line">n: 134907508240262137946502074360739103059110939023118055674568339675274978708216465550239395185797633495974788047880328560410956605895894497803797294715631963939546472939054512693762329563642230731635928665937542607055460883018173012233396950213422702996807273870440698007181387418977498579818700406673368084937</span><br></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>直接將 n 扔上factordb發現好多prime<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">42125267 · 49833439 · 58693039 · 61513877 · 167006983813971973935755769744287313795624064948679838624701034583661551637974040070265964882467867666872657483049263378360657863549 · 106580625826530329045051134241813132858137977273664192502334106456384150414405388669523053631392655455506681541904952100571943163465502692906512867</span><br></pre></td></tr></table></figure></p>
+<p>醒起有樣野好似叫做 MPRSA (Multi Prime RSA)<br>但係佢好似無比 e 喎 , 咁是但塞住個65537落去試試先</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import gmpy</span><br><span class="line"></span><br><span class="line">def chinese_remainder(n, a):</span><br><span class="line">    sum = 0</span><br><span class="line">    prod = reduce(lambda a, b: a*b, n)</span><br><span class="line"></span><br><span class="line">    for n_i, a_i in zip(n, a):</span><br><span class="line">        p = prod / n_i</span><br><span class="line">        sum += a_i * gmpy.invert(p, n_i) * p</span><br><span class="line">    return sum % prod</span><br><span class="line"></span><br><span class="line">c = 20318623659277133784436863405159350994457887674343039464217662595169547155252162707757860373904591558880102908865139317161642898188843552485749556428171374190436116308993843078746618097974105761149153341729931060530612128761115767471801348290177493316532913006382242873832659641556157675014368433683567068217</span><br><span class="line"></span><br><span class="line">n = 134907508240262137946502074360739103059110939023118055674568339675274978708216465550239395185797633495974788047880328560410956605895894497803797294715631963939546472939054512693762329563642230731635928665937542607055460883018173012233396950213422702996807273870440698007181387418977498579818700406673368084937</span><br><span class="line"></span><br><span class="line">e = 65537</span><br><span class="line"></span><br><span class="line">primes = [</span><br><span class="line">    42125267,</span><br><span class="line">    49833439,</span><br><span class="line">    58693039,</span><br><span class="line">    61513877,</span><br><span class="line">    167006983813971973935755769744287313795624064948679838624701034583661551637974040070265964882467867666872657483049263378360657863549,</span><br><span class="line">    106580625826530329045051134241813132858137977273664192502334106456384150414405388669523053631392655455506681541904952100571943163465502692906512867]</span><br><span class="line"></span><br><span class="line">n_ary = []</span><br><span class="line">a_ary = []</span><br><span class="line">for p in primes:</span><br><span class="line">    phi = p - 1</span><br><span class="line">    d = gmpy.invert(e, phi)</span><br><span class="line">    mk = pow(c, d, p)</span><br><span class="line">    n_ary.append(p)</span><br><span class="line">    a_ary.append(mk)</span><br><span class="line"></span><br><span class="line">m = chinese_remainder(n_ary, a_ary)</span><br><span class="line">flag = (&apos;%x&apos; % m).decode(&apos;hex&apos;)</span><br><span class="line">print flag</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/" data-id="cjgaye6lv000dfkw5ntdwtm4l" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/22/TimisoaraCTF2018-cparty/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nuevo</strong>
+      <div class="article-nav-title">
+        
+          TimisoaraCTF2018-cparty
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/22/TimisoaraCTF2018-Squirrels/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Viejo</strong>
+      <div class="article-nav-title">TimisoaraCTF2018-Squirrels</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archivos</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Posts recientes</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/">TimisoaraCTF2018-ForeignLanguage</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-Attendance/">TimisoaraCTF2018-Attendance</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-cparty/">TimisoaraCTF2018-cparty</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/">TimisoaraCTF2018-NotYourAverageRSA</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CatPawn<br>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

