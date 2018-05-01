@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASISCTF2018-LeftOrRight | CatPawn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="QuestionBinaryright_or_left Solution見到咁大個binary都知唔方好野 , 是但扔入 ida 睇下咩環境先啦 Search strings 見到有D咁既野 見到 ASIS喎 , 睇下邊到call過先 見到What’s the Secret Key? 喎 , 仲唔係關鍵位 , 直接跟入去睇睇啦 , 睇番 xref path發現係 sub_8270 call出黎既跟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASISCTF2018-LeftOrRight">
+<meta property="og:url" content="https://catpawn.github.io/2018/05/01/ASISCTF2018-LeftOrRight/index.html">
+<meta property="og:site_name" content="CatPawn">
+<meta property="og:description" content="QuestionBinaryright_or_left Solution見到咁大個binary都知唔方好野 , 是但扔入 ida 睇下咩環境先啦 Search strings 見到有D咁既野 見到 ASIS喎 , 睇下邊到call過先 見到What’s the Secret Key? 喎 , 仲唔係關鍵位 , 直接跟入去睇睇啦 , 睇番 xref path發現係 sub_8270 call出黎既跟">
+<meta property="og:image" content="https://catpawn.github.io/2018/05/01/ASISCTF2018-LeftOrRight/1.png">
+<meta property="og:image" content="https://catpawn.github.io/2018/05/01/ASISCTF2018-LeftOrRight/2.png">
+<meta property="og:image" content="https://catpawn.github.io/2018/05/01/ASISCTF2018-LeftOrRight/3.png">
+<meta property="og:updated_time" content="2018-05-01T15:40:46.941Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ASISCTF2018-LeftOrRight">
+<meta name="twitter:description" content="QuestionBinaryright_or_left Solution見到咁大個binary都知唔方好野 , 是但扔入 ida 睇下咩環境先啦 Search strings 見到有D咁既野 見到 ASIS喎 , 睇下邊到call過先 見到What’s the Secret Key? 喎 , 仲唔係關鍵位 , 直接跟入去睇睇啦 , 睇番 xref path發現係 sub_8270 call出黎既跟">
+<meta name="twitter:image" content="https://catpawn.github.io/2018/05/01/ASISCTF2018-LeftOrRight/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="CatPawn" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CatPawn</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ASISCTF2018-LeftOrRight" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/01/ASISCTF2018-LeftOrRight/" class="article-date">
+  <time datetime="2018-05-01T15:09:20.000Z" itemprop="datePublished">2018-05-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ASISCTF2018-LeftOrRight
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="right_or_left">right_or_left</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>見到咁大個binary都知唔方好野 , 是但扔入 ida 睇下咩環境先啦</p>
+<p>Search strings 見到有D咁既野<br><img src="1.png" alt=""></p>
+<p>見到 ASIS喎 , 睇下邊到call過先<br><img src="2.png" alt=""></p>
+<p>見到What’s the Secret Key? 喎 , 仲唔係關鍵位 , 直接跟入去睇睇啦 , 睇番 xref path發現係 sub_8270 call出黎既<br>跟過去既時候點知 call analysis failed , decompile唔到無計</p>
+<p>而家我地大概知個program點運作啦 , 首先sub_83c0應該係用黎判斷個user input , 之後判斷跳去(sub_9320 / sub_8c20 / sub_a340 / sub_af70 / sub_9b10)到print flag</p>
+<p>之後睇番之前 strings window果張圖 , 咪有D疑似Input既野既 , 所以寫左條script 出黎撞</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">key = <span class="string">"linesuperkeymysecretkeygivemetheflagasisctfisfun"</span></span><br><span class="line">key2 = <span class="string">"therustlanguageisfun"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#index = 36</span></span><br><span class="line"></span><br><span class="line">out = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(<span class="number">15</span>,<span class="number">20</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(key2)):</span><br><span class="line">		p = process(<span class="string">"./right_or_left"</span>)</span><br><span class="line">		p.recvuntil(<span class="string">"What's The Secret Key?\n"</span>)</span><br><span class="line">		p.sendline(key2[index:i+<span class="number">1</span>])</span><br><span class="line">		resp = p.recv(<span class="number">1024</span>)</span><br><span class="line">		<span class="keyword">if</span> <span class="string">"ASIS"</span> <span class="keyword">in</span> resp:</span><br><span class="line">			out += key2[index:i] + <span class="string">":"</span> + resp</span><br><span class="line">			info(key2[index:i] + <span class="string">":"</span> + resp)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"/root/Desktop/out"</span>,<span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(out)</span><br><span class="line">	f.close()</span><br></pre></td></tr></table></figure>
+<p>之前撞到4條flag<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">superkey : ASIS&#123;be_noughty_step_closer_to_see_the_flag&#125;</span><br><span class="line">mysecretkey : ASIS&#123;imagine_a_flag_in_a_watermelon_how_can_you_capture_it&#125;</span><br><span class="line">givemetheflag : ASIS&#123;you_should_try_harder_haha&#125;</span><br><span class="line">asisctfisfun : ASIS&#123;this_is_fake_flag_haha&#125;</span><br><span class="line">therustlanguageisfun : ASIS&#123;that_is_not_the_real_flag&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有一條撞唔到 , 咁試下暴力D 直接改call啦<br>睇下睇下發現 sub_83c0 有條判斷係check 如果係等於asisctfisfun就跳去 sub_af70<br>所以我地只要搵到 call sub_af70就可以慢慢試跳去邊個位<br><img src="3.png" alt=""></p>
+<p>試左幾次之後發現改去 call sub_9320就會get到條flag</p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASIS&#123;Rust_!s_Right_i5_rust_!5_rust_but_rust_!s_no7_left&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-LeftOrRight/" data-id="cjgnuburi0001zww5qwzfbxnd" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/01/ASISCTF2018-WarmUp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">ASISCTF2018-WarmUp</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-LeftOrRight/">ASISCTF2018-LeftOrRight</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-WarmUp/">ASISCTF2018-WarmUp</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-TheEarlySchool/">ASISCTF2018-TheEarlySchool</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/">TimisoaraCTF2018-ForeignLanguage</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CatPawn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

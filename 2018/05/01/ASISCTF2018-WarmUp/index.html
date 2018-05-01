@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASISCTF2018-WarmUp | CatPawn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Question1234567#define M 37#define	q (2+M/M)#define	v (q/q)#define	ef ((v+q)/2)#define	f (q-v-ef)#define k (8-ef)struct b&amp;#123;int64_t y[13];&amp;#125;S;int m=1811939329,N=1,t[1&amp;lt;&amp;lt;26]=&amp;#123;2&amp;#125;,a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASISCTF2018-WarmUp">
+<meta property="og:url" content="https://catpawn.github.io/2018/05/01/ASISCTF2018-WarmUp/index.html">
+<meta property="og:site_name" content="CatPawn">
+<meta property="og:description" content="Question1234567#define M 37#define	q (2+M/M)#define	v (q/q)#define	ef ((v+q)/2)#define	f (q-v-ef)#define k (8-ef)struct b&amp;#123;int64_t y[13];&amp;#125;S;int m=1811939329,N=1,t[1&amp;lt;&amp;lt;26]=&amp;#123;2&amp;#125;,a">
+<meta property="og:updated_time" content="2018-05-01T15:08:42.144Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ASISCTF2018-WarmUp">
+<meta name="twitter:description" content="Question1234567#define M 37#define	q (2+M/M)#define	v (q/q)#define	ef ((v+q)/2)#define	f (q-v-ef)#define k (8-ef)struct b&amp;#123;int64_t y[13];&amp;#125;S;int m=1811939329,N=1,t[1&amp;lt;&amp;lt;26]=&amp;#123;2&amp;#125;,a">
+  
+    <link rel="alternate" href="/atom.xml" title="CatPawn" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CatPawn</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ASISCTF2018-WarmUp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/01/ASISCTF2018-WarmUp/" class="article-date">
+  <time datetime="2018-05-01T15:02:37.000Z" itemprop="datePublished">2018-05-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ASISCTF2018-WarmUp
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 37</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	q (2+M/M)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	v (q/q)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	ef ((v+q)/2)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	f (q-v-ef)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> k (8-ef)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">b</span>&#123;</span><span class="keyword">int64_t</span> y[<span class="number">13</span>];&#125;S;<span class="keyword">int</span> m=<span class="number">1811939329</span>,N=<span class="number">1</span>,t[<span class="number">1</span>&lt;&lt;<span class="number">26</span>]=&#123;<span class="number">2</span>&#125;,a,*p,i,e=<span class="number">73421233</span>,s,c,U=<span class="number">1</span>;g(d,h)&#123;<span class="keyword">for</span>(i=s;i&lt;<span class="number">1</span>&lt;&lt;<span class="number">25</span>;i*=<span class="number">2</span>)d=d*<span class="number">1L</span>L*d%m;<span class="keyword">for</span>(p=t;p&lt;t+N;p+=s)<span class="keyword">for</span>(i=s,c=<span class="number">1</span>;i;i--)a=p[s]*(h?c:<span class="number">1L</span>L)%m,p[s]=(m*<span class="number">1U</span>+*p-a)*(h?<span class="number">1L</span>L:c)%m,*p=(a*<span class="number">1U</span>+*p)%m,p++,c=c*<span class="number">1L</span>L*d%m;&#125;l()&#123;<span class="keyword">while</span>(e/=<span class="number">2</span>)&#123;N*=<span class="number">2</span>;U=U*<span class="number">1L</span>L*(m+<span class="number">1</span>)/<span class="number">2</span>%m;<span class="keyword">for</span>(s=N;s/=<span class="number">2</span>;)g(<span class="number">136</span>,<span class="number">0</span>);<span class="keyword">for</span>(p=t;p&lt;t+N;p++)*p=*p*<span class="number">1L</span>L**p%m*U%m;<span class="keyword">for</span>(s=<span class="number">1</span>;s&lt;N;s*=<span class="number">2</span>)g(<span class="number">839354248</span>,<span class="number">1</span>);<span class="keyword">for</span>(a=<span class="number">0</span>,p=t;p&lt;t+N;)a+=*p&lt;&lt;(e&amp;<span class="number">1</span>),*p++=a%<span class="number">10</span>,a/=<span class="number">10</span>;&#125;&#125;z(n)&#123;<span class="keyword">int</span> y=<span class="number">3</span>,j,c;<span class="keyword">for</span>(j=<span class="number">2</span>;j&lt;=n;)&#123;l();<span class="keyword">for</span>(c=<span class="number">2</span>;c&lt;=y<span class="number">-1</span>;c++)&#123;l();<span class="keyword">if</span>(y%c==<span class="number">0</span>)<span class="keyword">break</span>;&#125;<span class="keyword">if</span>(c==y)&#123;l();j++;&#125;y++;&#125;l();<span class="keyword">return</span> y<span class="number">-1</span>;&#125;main(a, pq) <span class="keyword">char</span>* pq;&#123;<span class="keyword">int</span> b=<span class="keyword">sizeof</span>(S),y=b,j=M;l();<span class="keyword">int</span> x[M]=&#123;b-M-<span class="keyword">sizeof</span>((<span class="keyword">short</span> <span class="keyword">int</span>) a),(b&gt;&gt;v)+(k&lt;&lt;v)+ (v&lt;&lt;(q|ef)) + z(v+(ef&lt;&lt;v)),(z(k*ef)&lt;&lt;v)-<span class="built_in">pow</span>(ef,f), z(( (j-ef*k)|(ef&lt;&lt;k&gt;&gt;v)/k-ef&lt;&lt;v)-ef),(((y+M)&amp;b)&lt;&lt;(k/q+ef))-z(ef+v),((ef&lt;&lt;k)-v)&amp;y,y*v+v,(ef&lt;&lt;(q*ef-v-(k&gt;&gt;ef)))*q-v,(f&lt;&lt;q)|(ef&lt;&lt;(q*f+k))-j+k,(z(z(z(z(z(v)))))*q)&amp;(((j/q)-(ef&lt;&lt;v))&lt;&lt;q)|(j+(q|(ef&lt;&lt;v))),y|(q+v),(ef&lt;&lt;ef)-v+ef*(((j&gt;&gt;ef)|j)-v+ef-q+v),(z(j&amp;(b&lt;&lt;ef))&amp;(z(v&lt;&lt;v)&lt;&lt;k))-(q&lt;&lt;v)-q,(k&lt;&lt;q)+q,(z(y)&gt;&gt;(ef&lt;&lt;v))+(z(k+v))-q,(z(z(k&amp;ef|j))&amp;b|ef|v&lt;&lt;f&lt;&lt;q&lt;&lt;v&amp;ef&gt;&gt;k|q&lt;&lt;ef&lt;&lt;v|k|q)+z(v&lt;&lt;v)+v,(ef&gt;&gt;v)*q*z(k-v)+z(ef&lt;&lt;ef&amp;q|k)+ef,z(k&lt;&lt;k)&amp;v&amp;k|y+k-v,z(f&gt;&gt;ef|k&gt;&gt;ef|v|k)*(ef&gt;&gt;v)*q,(ef&lt;&lt;k-ef&lt;&lt;v&gt;&gt;q&lt;&lt;ef*ef)-j+(ef&lt;&lt;v),z(ef*k)*z(v&lt;&lt;v)+k-v,z((z(k)&lt;&lt;z(v)))&amp;y|k|v,z(ef&lt;&lt;ef&lt;&lt;v&lt;&lt;v)/ef+z(v&lt;&lt;ef|k|(b&gt;&gt;q)&amp;y-f)-(ef&lt;&lt;q)+(k-v)-ef,k&lt;&lt;(ef+q)/z(ef)*z(q)&amp;z(k&lt;&lt;k)|v,((z(y|j&gt;&gt;k*ef))%ef&lt;&lt;z(v&lt;&lt;v&lt;&lt;v)&gt;&gt;q&lt;&lt;q|j)/ef+v,(j-ef&lt;&lt;ef&lt;&lt;v*z(v&gt;&gt;v&lt;&lt;v)&gt;&gt;ef)/ef%z(k&lt;&lt;j)+q,z(k-v)+k|z(ef&lt;&lt;k&gt;&gt;v&lt;&lt;f)-z(q&lt;&lt;q)*ef&gt;&gt;v,(z(ef|y&amp;j|k)%q|j+ef&lt;&lt;z(k|ef)%k&lt;&lt;q|ef|k&lt;&lt;ef&lt;&lt;q/ef|y/ef+j&gt;&gt;q)&amp;k&lt;&lt;j|ef+v,<span class="number">84</span>,z(v*ef&lt;&lt;ef&lt;&lt;q)*q%ef&lt;&lt;k|k|q-v,((z(<span class="number">20</span>)*v)|(f&gt;&gt;q)|(k&lt;&lt;k))/ef-(ef&lt;&lt;(v*q+ef))-(k&lt;&lt;q)+z(k)-q&#125;;<span class="keyword">while</span>(j--)&#123;<span class="built_in">putchar</span>(x[M-v-j]);&#125;<span class="built_in">printf</span>(<span class="string">" From ASIS With Love &lt;3\n"</span>);<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>見到堆疑似 C 既野 , 咁試下直接拍落visual studio 行下啦 , 同埋嘗試補番d data type比佢 , 然後等左幾分鐘就出左flag了了<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 37</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	q (2+M/M)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	v (q/q)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	ef ((v+q)/2)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	f (q-v-ef)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> k (8-ef)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">b</span> &#123;</span> <span class="keyword">int64_t</span> y[<span class="number">13</span>]; &#125;S; </span><br><span class="line"><span class="keyword">int</span> m = <span class="number">1811939329</span>, N = <span class="number">1</span>, t[<span class="number">1</span> &lt;&lt; <span class="number">26</span>] = &#123; <span class="number">2</span> &#125;, a, *p, i, e = <span class="number">73421233</span>, s, c, U = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">(<span class="keyword">long</span> d,<span class="keyword">long</span> h)</span> </span>&#123; <span class="keyword">for</span> (i = s; i&lt;<span class="number">1</span> &lt;&lt; <span class="number">25</span>; i *= <span class="number">2</span>)d = d * <span class="number">1L</span>L * d%m; <span class="keyword">for</span> (p = t; p&lt;t + N; p += s)<span class="keyword">for</span> (i = s, c = <span class="number">1</span>; i; i--)a = p[s] * (h ? c : <span class="number">1L</span>L) % m, p[s] = (m * <span class="number">1U</span> + *p - a)*(h ? <span class="number">1L</span>L : c) % m, *p = (a * <span class="number">1U</span> + *p) % m, p++, c = c * <span class="number">1L</span>L * d%m; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">l</span><span class="params">()</span> </span>&#123; <span class="keyword">while</span> (e /= <span class="number">2</span>) &#123; N *= <span class="number">2</span>; U = U * <span class="number">1L</span>L * (m + <span class="number">1</span>) / <span class="number">2</span> % m; <span class="keyword">for</span> (s = N; s /= <span class="number">2</span>;)g(<span class="number">136</span>, <span class="number">0</span>); <span class="keyword">for</span> (p = t; p&lt;t + N; p++)*p = *p * <span class="number">1L</span>L * *p%m*U%m; <span class="keyword">for</span> (s = <span class="number">1</span>; s&lt;N; s *= <span class="number">2</span>)g(<span class="number">839354248</span>, <span class="number">1</span>); <span class="keyword">for</span> (a = <span class="number">0</span>, p = t; p&lt;t + N;)a += *p &lt;&lt; (e &amp; <span class="number">1</span>), *p++ = a % <span class="number">10</span>, a /= <span class="number">10</span>; &#125; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">z</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123; <span class="keyword">int</span> y = <span class="number">3</span>, j, c; <span class="keyword">for</span> (j = <span class="number">2</span>; j &lt;= n;) &#123; l(); <span class="keyword">for</span> (c = <span class="number">2</span>; c &lt;= y - <span class="number">1</span>; c++) &#123; l(); <span class="keyword">if</span> (y%c == <span class="number">0</span>)<span class="keyword">break</span>; &#125;<span class="keyword">if</span> (c == y) &#123; l(); j++; &#125;y++; &#125;l(); <span class="keyword">return</span> y - <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="keyword">int</span> b = <span class="keyword">sizeof</span>(S), y = b, j = M; l(); <span class="keyword">int</span> x[M] = &#123; b - M - <span class="keyword">sizeof</span>((<span class="keyword">short</span> <span class="keyword">int</span>)a),(b &gt;&gt; v) + (k &lt;&lt; v) + (v &lt;&lt; (q | ef)) + z(v + (ef &lt;&lt; v)),(z(k*ef) &lt;&lt; v) - <span class="built_in">pow</span>(ef,f), z(((j - ef*k) | (ef &lt;&lt; k &gt;&gt; v) / k - ef &lt;&lt; v) - ef),(((y + M)&amp;b) &lt;&lt; (k / q + ef)) - z(ef + v),((ef &lt;&lt; k) - v)&amp;y,y*v + v,(ef &lt;&lt; (q*ef - v - (k &gt;&gt; ef)))*q - v,(f &lt;&lt; q) | (ef &lt;&lt; (q*f + k)) - j + k,(z(z(z(z(z(v)))))*q)&amp;(((j / q) - (ef &lt;&lt; v)) &lt;&lt; q) | (j + (q | (ef &lt;&lt; v))),y | (q + v),(ef &lt;&lt; ef) - v + ef*(((j &gt;&gt; ef) | j) - v + ef - q + v),(z(j&amp;(b &lt;&lt; ef))&amp;(z(v &lt;&lt; v) &lt;&lt; k)) - (q &lt;&lt; v) - q,(k &lt;&lt; q) + q,(z(y) &gt;&gt; (ef &lt;&lt; v)) + (z(k + v)) - q,(z(z(k&amp;ef | j))&amp;b | ef | v &lt;&lt; f &lt;&lt; q &lt;&lt; v&amp;ef &gt;&gt; k | q &lt;&lt; ef &lt;&lt; v | k | q) + z(v &lt;&lt; v) + v,(ef &gt;&gt; v)*q*z(k - v) + z(ef &lt;&lt; ef&amp;q | k) + ef,z(k &lt;&lt; k)&amp;v&amp;k | y + k - v,z(f &gt;&gt; ef | k &gt;&gt; ef | v | k)*(ef &gt;&gt; v)*q,(ef &lt;&lt; k - ef &lt;&lt; v &gt;&gt; q &lt;&lt; ef*ef) - j + (ef &lt;&lt; v),z(ef*k)*z(v &lt;&lt; v) + k - v,z((z(k) &lt;&lt; z(v)))&amp;y | k | v,z(ef &lt;&lt; ef &lt;&lt; v &lt;&lt; v) / ef + z(v &lt;&lt; ef | k | (b &gt;&gt; q)&amp;y - f) - (ef &lt;&lt; q) + (k - v) - ef,k &lt;&lt; (ef + q) / z(ef)*z(q)&amp;z(k &lt;&lt; k) | v,((z(y | j &gt;&gt; k*ef)) % ef &lt;&lt; z(v &lt;&lt; v &lt;&lt; v) &gt;&gt; q &lt;&lt; q | j) / ef + v,(j - ef &lt;&lt; ef &lt;&lt; v*z(v &gt;&gt; v &lt;&lt; v) &gt;&gt; ef) / ef%z(k &lt;&lt; j) + q,z(k - v) + k | z(ef &lt;&lt; k &gt;&gt; v &lt;&lt; f) - z(q &lt;&lt; q)*ef &gt;&gt; v,(z(ef | y&amp;j | k) % q | j + ef &lt;&lt; z(k | ef) % k &lt;&lt; q | ef | k &lt;&lt; ef &lt;&lt; q / ef | y / ef + j &gt;&gt; q)&amp;k &lt;&lt; j | ef + v,<span class="number">84</span>,z(v*ef &lt;&lt; ef &lt;&lt; q)*q%ef &lt;&lt; k | k | q - v,((z(<span class="number">20</span>)*v) | (f &gt;&gt; q) | (k &lt;&lt; k)) / ef - (ef &lt;&lt; (v*q + ef)) - (k &lt;&lt; q) + z(k) - q &#125;; <span class="keyword">while</span> (j--) &#123; <span class="built_in">putchar</span>(x[M - v - j]); &#125;<span class="built_in">printf</span>(<span class="string">" From ASIS With Love &lt;3\n"</span>); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASIS&#123;hi_all_w31c0m3_to_ASISCTF&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-WarmUp/" data-id="cjgnuburk0002zww5xd8cgr56" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/01/ASISCTF2018-LeftOrRight/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          ASISCTF2018-LeftOrRight
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/01/ASISCTF2018-TheEarlySchool/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">ASISCTF2018-TheEarlySchool</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-LeftOrRight/">ASISCTF2018-LeftOrRight</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-WarmUp/">ASISCTF2018-WarmUp</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-TheEarlySchool/">ASISCTF2018-TheEarlySchool</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/">TimisoaraCTF2018-ForeignLanguage</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CatPawn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

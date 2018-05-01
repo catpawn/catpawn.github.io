@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
@@ -60,6 +60,131 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-ASISCTF2018-LeftOrRight" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/01/ASISCTF2018-LeftOrRight/" class="article-date">
+  <time datetime="2018-05-01T15:09:20.000Z" itemprop="datePublished">2018-05-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/01/ASISCTF2018-LeftOrRight/">ASISCTF2018-LeftOrRight</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="right_or_left">right_or_left</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>見到咁大個binary都知唔方好野 , 是但扔入 ida 睇下咩環境先啦</p>
+<p>Search strings 見到有D咁既野<br><img src="1.png" alt=""></p>
+<p>見到 ASIS喎 , 睇下邊到call過先<br><img src="2.png" alt=""></p>
+<p>見到What’s the Secret Key? 喎 , 仲唔係關鍵位 , 直接跟入去睇睇啦 , 睇番 xref path發現係 sub_8270 call出黎既<br>跟過去既時候點知 call analysis failed , decompile唔到無計</p>
+<p>而家我地大概知個program點運作啦 , 首先sub_83c0應該係用黎判斷個user input , 之後判斷跳去(sub_9320 / sub_8c20 / sub_a340 / sub_af70 / sub_9b10)到print flag</p>
+<p>之後睇番之前 strings window果張圖 , 咪有D疑似Input既野既 , 所以寫左條script 出黎撞</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">key = <span class="string">"linesuperkeymysecretkeygivemetheflagasisctfisfun"</span></span><br><span class="line">key2 = <span class="string">"therustlanguageisfun"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#index = 36</span></span><br><span class="line"></span><br><span class="line">out = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(<span class="number">15</span>,<span class="number">20</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(key2)):</span><br><span class="line">		p = process(<span class="string">"./right_or_left"</span>)</span><br><span class="line">		p.recvuntil(<span class="string">"What's The Secret Key?\n"</span>)</span><br><span class="line">		p.sendline(key2[index:i+<span class="number">1</span>])</span><br><span class="line">		resp = p.recv(<span class="number">1024</span>)</span><br><span class="line">		<span class="keyword">if</span> <span class="string">"ASIS"</span> <span class="keyword">in</span> resp:</span><br><span class="line">			out += key2[index:i] + <span class="string">":"</span> + resp</span><br><span class="line">			info(key2[index:i] + <span class="string">":"</span> + resp)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"/root/Desktop/out"</span>,<span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(out)</span><br><span class="line">	f.close()</span><br></pre></td></tr></table></figure>
+<p>之前撞到4條flag<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">superkey : ASIS&#123;be_noughty_step_closer_to_see_the_flag&#125;</span><br><span class="line">mysecretkey : ASIS&#123;imagine_a_flag_in_a_watermelon_how_can_you_capture_it&#125;</span><br><span class="line">givemetheflag : ASIS&#123;you_should_try_harder_haha&#125;</span><br><span class="line">asisctfisfun : ASIS&#123;this_is_fake_flag_haha&#125;</span><br><span class="line">therustlanguageisfun : ASIS&#123;that_is_not_the_real_flag&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有一條撞唔到 , 咁試下暴力D 直接改call啦<br>睇下睇下發現 sub_83c0 有條判斷係check 如果係等於asisctfisfun就跳去 sub_af70<br>所以我地只要搵到 call sub_af70就可以慢慢試跳去邊個位<br><img src="3.png" alt=""></p>
+<p>試左幾次之後發現改去 call sub_9320就會get到條flag</p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASIS&#123;Rust_!s_Right_i5_rust_!5_rust_but_rust_!s_no7_left&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-LeftOrRight/" data-id="cjgnuburi0001zww5qwzfbxnd" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ASISCTF2018-WarmUp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/01/ASISCTF2018-WarmUp/" class="article-date">
+  <time datetime="2018-05-01T15:02:37.000Z" itemprop="datePublished">2018-05-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/01/ASISCTF2018-WarmUp/">ASISCTF2018-WarmUp</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 37</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	q (2+M/M)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	v (q/q)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	ef ((v+q)/2)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	f (q-v-ef)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> k (8-ef)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">b</span>&#123;</span><span class="keyword">int64_t</span> y[<span class="number">13</span>];&#125;S;<span class="keyword">int</span> m=<span class="number">1811939329</span>,N=<span class="number">1</span>,t[<span class="number">1</span>&lt;&lt;<span class="number">26</span>]=&#123;<span class="number">2</span>&#125;,a,*p,i,e=<span class="number">73421233</span>,s,c,U=<span class="number">1</span>;g(d,h)&#123;<span class="keyword">for</span>(i=s;i&lt;<span class="number">1</span>&lt;&lt;<span class="number">25</span>;i*=<span class="number">2</span>)d=d*<span class="number">1L</span>L*d%m;<span class="keyword">for</span>(p=t;p&lt;t+N;p+=s)<span class="keyword">for</span>(i=s,c=<span class="number">1</span>;i;i--)a=p[s]*(h?c:<span class="number">1L</span>L)%m,p[s]=(m*<span class="number">1U</span>+*p-a)*(h?<span class="number">1L</span>L:c)%m,*p=(a*<span class="number">1U</span>+*p)%m,p++,c=c*<span class="number">1L</span>L*d%m;&#125;l()&#123;<span class="keyword">while</span>(e/=<span class="number">2</span>)&#123;N*=<span class="number">2</span>;U=U*<span class="number">1L</span>L*(m+<span class="number">1</span>)/<span class="number">2</span>%m;<span class="keyword">for</span>(s=N;s/=<span class="number">2</span>;)g(<span class="number">136</span>,<span class="number">0</span>);<span class="keyword">for</span>(p=t;p&lt;t+N;p++)*p=*p*<span class="number">1L</span>L**p%m*U%m;<span class="keyword">for</span>(s=<span class="number">1</span>;s&lt;N;s*=<span class="number">2</span>)g(<span class="number">839354248</span>,<span class="number">1</span>);<span class="keyword">for</span>(a=<span class="number">0</span>,p=t;p&lt;t+N;)a+=*p&lt;&lt;(e&amp;<span class="number">1</span>),*p++=a%<span class="number">10</span>,a/=<span class="number">10</span>;&#125;&#125;z(n)&#123;<span class="keyword">int</span> y=<span class="number">3</span>,j,c;<span class="keyword">for</span>(j=<span class="number">2</span>;j&lt;=n;)&#123;l();<span class="keyword">for</span>(c=<span class="number">2</span>;c&lt;=y<span class="number">-1</span>;c++)&#123;l();<span class="keyword">if</span>(y%c==<span class="number">0</span>)<span class="keyword">break</span>;&#125;<span class="keyword">if</span>(c==y)&#123;l();j++;&#125;y++;&#125;l();<span class="keyword">return</span> y<span class="number">-1</span>;&#125;main(a, pq) <span class="keyword">char</span>* pq;&#123;<span class="keyword">int</span> b=<span class="keyword">sizeof</span>(S),y=b,j=M;l();<span class="keyword">int</span> x[M]=&#123;b-M-<span class="keyword">sizeof</span>((<span class="keyword">short</span> <span class="keyword">int</span>) a),(b&gt;&gt;v)+(k&lt;&lt;v)+ (v&lt;&lt;(q|ef)) + z(v+(ef&lt;&lt;v)),(z(k*ef)&lt;&lt;v)-<span class="built_in">pow</span>(ef,f), z(( (j-ef*k)|(ef&lt;&lt;k&gt;&gt;v)/k-ef&lt;&lt;v)-ef),(((y+M)&amp;b)&lt;&lt;(k/q+ef))-z(ef+v),((ef&lt;&lt;k)-v)&amp;y,y*v+v,(ef&lt;&lt;(q*ef-v-(k&gt;&gt;ef)))*q-v,(f&lt;&lt;q)|(ef&lt;&lt;(q*f+k))-j+k,(z(z(z(z(z(v)))))*q)&amp;(((j/q)-(ef&lt;&lt;v))&lt;&lt;q)|(j+(q|(ef&lt;&lt;v))),y|(q+v),(ef&lt;&lt;ef)-v+ef*(((j&gt;&gt;ef)|j)-v+ef-q+v),(z(j&amp;(b&lt;&lt;ef))&amp;(z(v&lt;&lt;v)&lt;&lt;k))-(q&lt;&lt;v)-q,(k&lt;&lt;q)+q,(z(y)&gt;&gt;(ef&lt;&lt;v))+(z(k+v))-q,(z(z(k&amp;ef|j))&amp;b|ef|v&lt;&lt;f&lt;&lt;q&lt;&lt;v&amp;ef&gt;&gt;k|q&lt;&lt;ef&lt;&lt;v|k|q)+z(v&lt;&lt;v)+v,(ef&gt;&gt;v)*q*z(k-v)+z(ef&lt;&lt;ef&amp;q|k)+ef,z(k&lt;&lt;k)&amp;v&amp;k|y+k-v,z(f&gt;&gt;ef|k&gt;&gt;ef|v|k)*(ef&gt;&gt;v)*q,(ef&lt;&lt;k-ef&lt;&lt;v&gt;&gt;q&lt;&lt;ef*ef)-j+(ef&lt;&lt;v),z(ef*k)*z(v&lt;&lt;v)+k-v,z((z(k)&lt;&lt;z(v)))&amp;y|k|v,z(ef&lt;&lt;ef&lt;&lt;v&lt;&lt;v)/ef+z(v&lt;&lt;ef|k|(b&gt;&gt;q)&amp;y-f)-(ef&lt;&lt;q)+(k-v)-ef,k&lt;&lt;(ef+q)/z(ef)*z(q)&amp;z(k&lt;&lt;k)|v,((z(y|j&gt;&gt;k*ef))%ef&lt;&lt;z(v&lt;&lt;v&lt;&lt;v)&gt;&gt;q&lt;&lt;q|j)/ef+v,(j-ef&lt;&lt;ef&lt;&lt;v*z(v&gt;&gt;v&lt;&lt;v)&gt;&gt;ef)/ef%z(k&lt;&lt;j)+q,z(k-v)+k|z(ef&lt;&lt;k&gt;&gt;v&lt;&lt;f)-z(q&lt;&lt;q)*ef&gt;&gt;v,(z(ef|y&amp;j|k)%q|j+ef&lt;&lt;z(k|ef)%k&lt;&lt;q|ef|k&lt;&lt;ef&lt;&lt;q/ef|y/ef+j&gt;&gt;q)&amp;k&lt;&lt;j|ef+v,<span class="number">84</span>,z(v*ef&lt;&lt;ef&lt;&lt;q)*q%ef&lt;&lt;k|k|q-v,((z(<span class="number">20</span>)*v)|(f&gt;&gt;q)|(k&lt;&lt;k))/ef-(ef&lt;&lt;(v*q+ef))-(k&lt;&lt;q)+z(k)-q&#125;;<span class="keyword">while</span>(j--)&#123;<span class="built_in">putchar</span>(x[M-v-j]);&#125;<span class="built_in">printf</span>(<span class="string">" From ASIS With Love &lt;3\n"</span>);<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>見到堆疑似 C 既野 , 咁試下直接拍落visual studio 行下啦 , 同埋嘗試補番d data type比佢 , 然後等左幾分鐘就出左flag了了<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 37</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	q (2+M/M)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	v (q/q)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	ef ((v+q)/2)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	f (q-v-ef)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> k (8-ef)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">b</span> &#123;</span> <span class="keyword">int64_t</span> y[<span class="number">13</span>]; &#125;S; </span><br><span class="line"><span class="keyword">int</span> m = <span class="number">1811939329</span>, N = <span class="number">1</span>, t[<span class="number">1</span> &lt;&lt; <span class="number">26</span>] = &#123; <span class="number">2</span> &#125;, a, *p, i, e = <span class="number">73421233</span>, s, c, U = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">(<span class="keyword">long</span> d,<span class="keyword">long</span> h)</span> </span>&#123; <span class="keyword">for</span> (i = s; i&lt;<span class="number">1</span> &lt;&lt; <span class="number">25</span>; i *= <span class="number">2</span>)d = d * <span class="number">1L</span>L * d%m; <span class="keyword">for</span> (p = t; p&lt;t + N; p += s)<span class="keyword">for</span> (i = s, c = <span class="number">1</span>; i; i--)a = p[s] * (h ? c : <span class="number">1L</span>L) % m, p[s] = (m * <span class="number">1U</span> + *p - a)*(h ? <span class="number">1L</span>L : c) % m, *p = (a * <span class="number">1U</span> + *p) % m, p++, c = c * <span class="number">1L</span>L * d%m; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">l</span><span class="params">()</span> </span>&#123; <span class="keyword">while</span> (e /= <span class="number">2</span>) &#123; N *= <span class="number">2</span>; U = U * <span class="number">1L</span>L * (m + <span class="number">1</span>) / <span class="number">2</span> % m; <span class="keyword">for</span> (s = N; s /= <span class="number">2</span>;)g(<span class="number">136</span>, <span class="number">0</span>); <span class="keyword">for</span> (p = t; p&lt;t + N; p++)*p = *p * <span class="number">1L</span>L * *p%m*U%m; <span class="keyword">for</span> (s = <span class="number">1</span>; s&lt;N; s *= <span class="number">2</span>)g(<span class="number">839354248</span>, <span class="number">1</span>); <span class="keyword">for</span> (a = <span class="number">0</span>, p = t; p&lt;t + N;)a += *p &lt;&lt; (e &amp; <span class="number">1</span>), *p++ = a % <span class="number">10</span>, a /= <span class="number">10</span>; &#125; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">z</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123; <span class="keyword">int</span> y = <span class="number">3</span>, j, c; <span class="keyword">for</span> (j = <span class="number">2</span>; j &lt;= n;) &#123; l(); <span class="keyword">for</span> (c = <span class="number">2</span>; c &lt;= y - <span class="number">1</span>; c++) &#123; l(); <span class="keyword">if</span> (y%c == <span class="number">0</span>)<span class="keyword">break</span>; &#125;<span class="keyword">if</span> (c == y) &#123; l(); j++; &#125;y++; &#125;l(); <span class="keyword">return</span> y - <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="keyword">int</span> b = <span class="keyword">sizeof</span>(S), y = b, j = M; l(); <span class="keyword">int</span> x[M] = &#123; b - M - <span class="keyword">sizeof</span>((<span class="keyword">short</span> <span class="keyword">int</span>)a),(b &gt;&gt; v) + (k &lt;&lt; v) + (v &lt;&lt; (q | ef)) + z(v + (ef &lt;&lt; v)),(z(k*ef) &lt;&lt; v) - <span class="built_in">pow</span>(ef,f), z(((j - ef*k) | (ef &lt;&lt; k &gt;&gt; v) / k - ef &lt;&lt; v) - ef),(((y + M)&amp;b) &lt;&lt; (k / q + ef)) - z(ef + v),((ef &lt;&lt; k) - v)&amp;y,y*v + v,(ef &lt;&lt; (q*ef - v - (k &gt;&gt; ef)))*q - v,(f &lt;&lt; q) | (ef &lt;&lt; (q*f + k)) - j + k,(z(z(z(z(z(v)))))*q)&amp;(((j / q) - (ef &lt;&lt; v)) &lt;&lt; q) | (j + (q | (ef &lt;&lt; v))),y | (q + v),(ef &lt;&lt; ef) - v + ef*(((j &gt;&gt; ef) | j) - v + ef - q + v),(z(j&amp;(b &lt;&lt; ef))&amp;(z(v &lt;&lt; v) &lt;&lt; k)) - (q &lt;&lt; v) - q,(k &lt;&lt; q) + q,(z(y) &gt;&gt; (ef &lt;&lt; v)) + (z(k + v)) - q,(z(z(k&amp;ef | j))&amp;b | ef | v &lt;&lt; f &lt;&lt; q &lt;&lt; v&amp;ef &gt;&gt; k | q &lt;&lt; ef &lt;&lt; v | k | q) + z(v &lt;&lt; v) + v,(ef &gt;&gt; v)*q*z(k - v) + z(ef &lt;&lt; ef&amp;q | k) + ef,z(k &lt;&lt; k)&amp;v&amp;k | y + k - v,z(f &gt;&gt; ef | k &gt;&gt; ef | v | k)*(ef &gt;&gt; v)*q,(ef &lt;&lt; k - ef &lt;&lt; v &gt;&gt; q &lt;&lt; ef*ef) - j + (ef &lt;&lt; v),z(ef*k)*z(v &lt;&lt; v) + k - v,z((z(k) &lt;&lt; z(v)))&amp;y | k | v,z(ef &lt;&lt; ef &lt;&lt; v &lt;&lt; v) / ef + z(v &lt;&lt; ef | k | (b &gt;&gt; q)&amp;y - f) - (ef &lt;&lt; q) + (k - v) - ef,k &lt;&lt; (ef + q) / z(ef)*z(q)&amp;z(k &lt;&lt; k) | v,((z(y | j &gt;&gt; k*ef)) % ef &lt;&lt; z(v &lt;&lt; v &lt;&lt; v) &gt;&gt; q &lt;&lt; q | j) / ef + v,(j - ef &lt;&lt; ef &lt;&lt; v*z(v &gt;&gt; v &lt;&lt; v) &gt;&gt; ef) / ef%z(k &lt;&lt; j) + q,z(k - v) + k | z(ef &lt;&lt; k &gt;&gt; v &lt;&lt; f) - z(q &lt;&lt; q)*ef &gt;&gt; v,(z(ef | y&amp;j | k) % q | j + ef &lt;&lt; z(k | ef) % k &lt;&lt; q | ef | k &lt;&lt; ef &lt;&lt; q / ef | y / ef + j &gt;&gt; q)&amp;k &lt;&lt; j | ef + v,<span class="number">84</span>,z(v*ef &lt;&lt; ef &lt;&lt; q)*q%ef &lt;&lt; k | k | q - v,((z(<span class="number">20</span>)*v) | (f &gt;&gt; q) | (k &lt;&lt; k)) / ef - (ef &lt;&lt; (v*q + ef)) - (k &lt;&lt; q) + z(k) - q &#125;; <span class="keyword">while</span> (j--) &#123; <span class="built_in">putchar</span>(x[M - v - j]); &#125;<span class="built_in">printf</span>(<span class="string">" From ASIS With Love &lt;3\n"</span>); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASIS&#123;hi_all_w31c0m3_to_ASISCTF&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-WarmUp/" data-id="cjgnuburk0002zww5xd8cgr56" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ASISCTF2018-TheEarlySchool" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/01/ASISCTF2018-TheEarlySchool/" class="article-date">
+  <time datetime="2018-05-01T14:36:44.000Z" itemprop="datePublished">2018-05-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/01/ASISCTF2018-TheEarlySchool/">ASISCTF2018-TheEarlySchool</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> FLAG, round</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> set(msg) == set([<span class="string">'0'</span>, <span class="string">'1'</span>])</span><br><span class="line">    enc = [msg[i:i+<span class="number">2</span>] + str(int(msg[i]) ^ int(msg[min(i+<span class="number">1</span>, len(msg)<span class="number">-1</span>)])) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(msg), <span class="number">2</span>)]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join(enc)</span><br><span class="line"></span><br><span class="line">ENC = bin(bytes_to_long(FLAG))[<span class="number">2</span>:]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> xrange(round):</span><br><span class="line">    ENC = encrypt(ENC)</span><br><span class="line"></span><br><span class="line">fp = open(<span class="string">'FLAG.enc'</span>, <span class="string">'w'</span>)</span><br><span class="line">fp.write(long_to_bytes(int(ENC, <span class="number">2</span>)))</span><br><span class="line">fp.close()</span><br></pre></td></tr></table></figure>
+<h3 id="Encrypted-flag"><a href="#Encrypted-flag" class="headerlink" title="Encrypted flag:"></a>Encrypted flag:</h3><p><a href="FLAG.enc">FLAG.enc</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>見條script每次都係 msg[i:i+2] 再加堆奇怪野 , 咁唔理佢加咩啦<br>應該brute force個round就可以解得番條flag出黎</p>
+<p>最後唔知點樣搵到個round係19<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">round = <span class="number">19</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(round)</span>:</span></span><br><span class="line">	enc = open(<span class="string">"FLAG.enc"</span>, <span class="string">"rb"</span>).read()</span><br><span class="line">	enc = bin(bytes_to_long(enc))[<span class="number">2</span>:]</span><br><span class="line">	dec = <span class="string">""</span></span><br><span class="line">	<span class="keyword">for</span> r <span class="keyword">in</span> range(round):</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(enc), <span class="number">3</span>):</span><br><span class="line">			dec += enc[i:i+<span class="number">2</span>]</span><br><span class="line">		enc = dec</span><br><span class="line">		dec = <span class="string">""</span></span><br><span class="line">	<span class="keyword">return</span> enc[:<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> hex(int(decrypt(round),<span class="number">2</span>))[<span class="number">2</span>:<span class="number">-1</span>].decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASIS&#123;50_S1mPl3_CryptO__4__warmup____&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-TheEarlySchool/" data-id="cjgnubure0000zww56362nq3j" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-TimisoaraCTF2018-Pshchology" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -91,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Pshchology/" data-id="cjgaye6lx000ffkw5cfza5y7i" class="article-share-link">Compartir</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Pshchology/" data-id="cjgnubus6000izww5hjc369lk" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -131,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-ForeignLanguage/" data-id="cjgaye6ls000bfkw5aux4sn7n" class="article-share-link">Compartir</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-ForeignLanguage/" data-id="cjgnubus4000gzww5mpdhfava" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -169,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Attendance/" data-id="cjgaye6lr000afkw5au17dobb" class="article-share-link">Compartir</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Attendance/" data-id="cjgnubus2000ezww516qezwhy" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -209,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-cparty/" data-id="cjgaye6m0000ifkw5ludekjil" class="article-share-link">Compartir</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-cparty/" data-id="cjgnubusm000kzww5a0edue6g" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -248,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/" data-id="cjgaye6lv000dfkw5ntdwtm4l" class="article-share-link">Compartir</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/" data-id="cjgnubus5000hzww5qjgdwwh9" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -288,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Squirrels/" data-id="cjgaye6ly000gfkw5xjuxpnfr" class="article-share-link">Compartir</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Squirrels/" data-id="cjgnubus6000jzww5mxvx9xxl" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -335,137 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-BookDir1-2/" data-id="cjgaye6lw000efkw5w053j0er" class="article-share-link">Compartir</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-NeverLanCTF2018-Turtles-All-The-Way-Down" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/" class="article-date">
-  <time datetime="2018-03-16T11:10:44.000Z" itemprop="datePublished">2018-03-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/">NeverLanCTF2018-Turtles-All-The-Way-Down</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="turtle">turtle</a></p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>就咁睇似係base64 encoded<br><img src="1.png" alt=""></p>
-<p>所以第一步就解左佢先啦<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64a</span><br><span class="line">enc = open(<span class="string">"C:/Users/Admin/Desktop/turtle"</span>,<span class="string">"rb"</span>).read()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"C:/Users/Admin/Desktop/turtle.dec"</span>,<span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(base64.b64decode(enc))</span><br><span class="line">	f.close()</span><br></pre></td></tr></table></figure></p>
-<p>解完出黎係堆咁既野<br><img src="2.png" alt=""></p>
-<p>但係我要既野正係中間果堆hex, 咁用sublime text處理下先啦<br>第一步 , 唔要頭果堆hex address<br><img src="3.png" alt=""></p>
-<p>然後唔要埋尾果堆<br><img src="4.png" alt=""></p>
-<p>最後就係replace晒d空格同埋換行就可以直接變番做binary<br>效果:<br><img src="5.png" alt=""></p>
-<p>睇番個header應該係gzip黎 , 試下直接unzip佢先<br>可能因為係windows機啦 , unzip完出黎有個paxHeader係到 , 直接del到 0x400應該就開到<br><img src="6.png" alt=""></p>
-<p>用file名開頭 , 應該係tar黎啦 , 直接unzip完終於出到個疑似係binary既野<br><img src="7.png" alt=""></p>
-<p>但係似乎個header變晒做0x00 , 試下人手加番落去 , 然後終於decompile到<br><img src="8.png" alt=""></p>
-<p>試下直接decode呢堆疑似hex既野啦<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">enc = [<span class="string">'584867774d5678344e6a42636544686d'</span>,<span class="string">'5848686c4d6c78344d545a6365475a6d'</span>,<span class="string">'584867795a6c78345a54466365444977'</span>,<span class="string">'584867794d6c78344e7a6c6365445132'</span>,<span class="string">'584867775a5678344d7a466365444178'</span>,<span class="string">'584867794d4678344d44526365444933'</span>,<span class="string">'584867774d5678345a475a6365444930'</span>,<span class="string">'58486778596c78344d6a42636544466a'</span>,<span class="string">'584867774d5678344d6a646365444178'</span>,<span class="string">'5848686b5a6c78344e6a5a6365445a6a'</span>,<span class="string">'584867324d5678344e6a646365446469'</span>,<span class="string">'58486732593178344e7a566365445930'</span>,<span class="string">'584867794d5678344e7a4a6365445a6d'</span>,<span class="string">'584867324d3178344e6d4a636544637a'</span>,<span class="string">'584867315a6c78344e6a466365445a6a'</span>,<span class="string">'58486732593178344e575a6365446330'</span>,<span class="string">'584867324f4678344e6a56636544566d'</span>,<span class="string">'584867334e3178344e6a466365446335'</span>,<span class="string">'584867315a6c78344e7a566365446377'</span>,<span class="string">'584867794d5678344e32526365444268'</span>]</span><br><span class="line">out = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> enc:</span><br><span class="line">	out += base64.b64decode(i.decode(<span class="string">'hex'</span>)).replace(<span class="string">"\\x"</span>,<span class="string">""</span>).decode(<span class="string">'hex'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> out</span><br></pre></td></tr></table></figure></p>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;lud!rocks_all_the_way_up!&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/03/16/NeverLanCTF2018-Turtles-All-The-Way-Down/" data-id="cjgaye6lu000cfkw593bgoi11" class="article-share-link">Compartir</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PragyanCTF2018-Scientists-research" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/16/PragyanCTF2018-Scientists-research/" class="article-date">
-  <time datetime="2018-03-16T10:56:38.000Z" itemprop="datePublished">2018-03-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/16/PragyanCTF2018-Scientists-research/">PragyanCTF2018-Scientists-research</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Excel"><a href="#Excel" class="headerlink" title="Excel"></a>Excel</h3><p><a href="observations.xlsx">observations.xlsx</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>就咁睇全部格都係裝住一個6位既數字 , 估計可能係color code黎 , 所以直接寫條script轉番每一格做顏色</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xlrd <span class="keyword">import</span> open_workbook</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image </span><br><span class="line"></span><br><span class="line">wb = open_workbook(<span class="string">'observations.xlsx'</span>)</span><br><span class="line"><span class="keyword">for</span> sheet <span class="keyword">in</span> wb.sheets():</span><br><span class="line">	number_of_rows = sheet.nrows</span><br><span class="line">	number_of_columns = sheet.ncols</span><br><span class="line">	flagImage = Image.new(<span class="string">'RGB'</span>, (number_of_columns,number_of_rows))</span><br><span class="line">	<span class="keyword">for</span> row <span class="keyword">in</span> range(<span class="number">1</span>, number_of_rows):</span><br><span class="line">		<span class="keyword">for</span> col <span class="keyword">in</span> range(number_of_columns):</span><br><span class="line">			value = str(hex(int(str(sheet.cell(row,col).value)[:<span class="number">-2</span>]))[<span class="number">2</span>:]).zfill(<span class="number">6</span>)</span><br><span class="line">			rgb = tuple(int(value[i:i+<span class="number">2</span>], <span class="number">16</span>) <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">0</span>, <span class="number">2</span> ,<span class="number">4</span>))</span><br><span class="line">			flagImage.putpixel((row,col),rgb)</span><br><span class="line">flagImage.save(<span class="string">"flag.png"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><p><img src="flag.png" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/03/16/PragyanCTF2018-Scientists-research/" data-id="cjgaye6lq0009fkw51zlokrmy" class="article-share-link">Compartir</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bamboofox2017-suck-file" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/01/Bamboofox2017-suck-file/" class="article-date">
-  <time datetime="2018-01-01T10:10:48.000Z" itemprop="datePublished">2018-01-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/Bamboofox2017-suck-file/">Bamboofox2017-suck-file</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="a79cc81251ba4c66ed91ccd01b423598818a76cf">a79cc81251ba4c66ed91ccd01b423598818a76cf</a></p>
-<p>睇番個file header 似乎係一個zip file<br>但係似乎pk變左細階 , 所以導致unzip唔到<br><img src="img1.png" alt=""></p>
-<p>將個header改番做正常zip file之後 , 可以正常解壓縮<br><img src="img2.png" alt=""></p>
-<p>但係入面又有另一個file , 個header又係錯既<br>咁既情況之下唯有寫條script自動搞啦</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">startFile = <span class="string">"a79cc81251ba4c66ed91ccd01b423598818a76cf"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fixHeader</span><span class="params">(fileName)</span>:</span></span><br><span class="line">	<span class="keyword">with</span> open(fileName,<span class="string">"r+b"</span>) <span class="keyword">as</span> f:</span><br><span class="line">		data = f.read()</span><br><span class="line">		f.seek(<span class="number">0</span>)</span><br><span class="line">		f.write(<span class="string">"\x50\x4b"</span> + data[<span class="number">2</span>:])</span><br><span class="line">		f.truncate()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sorted_dir</span><span class="params">(folder)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getmtime</span><span class="params">(name)</span>:</span></span><br><span class="line">        path = os.path.join(folder, name)</span><br><span class="line">        <span class="keyword">return</span> os.path.getmtime(path)</span><br><span class="line">    <span class="keyword">return</span> sorted(os.listdir(folder), key=getmtime, reverse=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">	l = sorted_dir(<span class="string">"./"</span>)</span><br><span class="line">	<span class="keyword">print</span> l</span><br><span class="line">	fixHeader(l[<span class="number">0</span>])</span><br><span class="line">	zip_ref = zipfile.ZipFile(l[<span class="number">0</span>], <span class="string">'r'</span>)</span><br><span class="line">	zip_ref.extractall(<span class="string">"./"</span>)</span><br><span class="line">	zip_ref.close()</span><br></pre></td></tr></table></figure>
-<p>解左100次之後 , 終於有個flag file出左黎<br><img src="img3.png" alt=""></p>
-<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><p>BAMBOOFOX{Fil3_hE4d3r_15_imp0rtaNt}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/01/01/Bamboofox2017-suck-file/" data-id="cjgaye6lg0003fkw50jjvj5vy" class="article-share-link">Compartir</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-BookDir1-2/" data-id="cjgnubus3000fzww506hcdzm8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -479,7 +474,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Siguiente &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -496,9 +491,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archivos</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
   </div>
 
@@ -506,9 +501,21 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Posts recientes</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-LeftOrRight/">ASISCTF2018-LeftOrRight</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-WarmUp/">ASISCTF2018-WarmUp</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-TheEarlySchool/">ASISCTF2018-TheEarlySchool</a>
+          </li>
         
           <li>
             <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
@@ -516,18 +523,6 @@
         
           <li>
             <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/">TimisoaraCTF2018-ForeignLanguage</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/22/TimisoaraCTF2018-Attendance/">TimisoaraCTF2018-Attendance</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/22/TimisoaraCTF2018-cparty/">TimisoaraCTF2018-cparty</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/">TimisoaraCTF2018-NotYourAverageRSA</a>
           </li>
         
       </ul>
@@ -543,7 +538,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 CatPawn<br>
-      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
