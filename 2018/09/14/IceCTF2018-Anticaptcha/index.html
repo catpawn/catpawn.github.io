@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>IceCTF2018-Anticaptcha | CatPawn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Solution比左個網 , 入面有百尻幾條問題 , 自動解啦咁12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849import requestsfrom bs4 import BeautifulSoupfrom math import sqrt; from itertoo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IceCTF2018-Anticaptcha">
+<meta property="og:url" content="https://catpawn.github.io/2018/09/14/IceCTF2018-Anticaptcha/index.html">
+<meta property="og:site_name" content="CatPawn">
+<meta property="og:description" content="Solution比左個網 , 入面有百尻幾條問題 , 自動解啦咁12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849import requestsfrom bs4 import BeautifulSoupfrom math import sqrt; from itertoo">
+<meta property="og:updated_time" content="2018-09-14T12:15:53.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IceCTF2018-Anticaptcha">
+<meta name="twitter:description" content="Solution比左個網 , 入面有百尻幾條問題 , 自動解啦咁12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849import requestsfrom bs4 import BeautifulSoupfrom math import sqrt; from itertoo">
+  
+    <link rel="alternate" href="/atom.xml" title="CatPawn" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">CatPawn</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://catpawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-IceCTF2018-Anticaptcha" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/14/IceCTF2018-Anticaptcha/" class="article-date">
+  <time datetime="2018-09-14T12:14:46.000Z" itemprop="datePublished">2018-09-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      IceCTF2018-Anticaptcha
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>比左個網 , 入面有百尻幾條問題 , 自動解啦咁<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt; <span class="keyword">from</span> itertools <span class="keyword">import</span> count, islice</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solveQuestion</span><span class="params">(s)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> <span class="string">"word in the following line"</span> <span class="keyword">in</span> s:</span><br><span class="line">		s = s.replace(<span class="string">"\n"</span>,<span class="string">" "</span>).replace(<span class="string">"."</span>,<span class="string">" "</span>).replace(<span class="string">"  "</span>,<span class="string">" "</span>)</span><br><span class="line">		num = int(s.split(<span class="string">" "</span>)[<span class="number">3</span>].replace(<span class="string">"th"</span>,<span class="string">""</span>).replace(<span class="string">"st"</span>,<span class="string">""</span>).replace(<span class="string">"nd"</span>,<span class="string">""</span>).replace(<span class="string">"rd"</span>,<span class="string">""</span>))</span><br><span class="line">		<span class="keyword">return</span> s.split(<span class="string">": "</span>)[<span class="number">1</span>].split(<span class="string">" "</span>)[num<span class="number">-1</span>]</span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"a prime number"</span> <span class="keyword">in</span> s:</span><br><span class="line">		num = int(s.split(<span class="string">" "</span>)[<span class="number">1</span>])</span><br><span class="line">		<span class="keyword">return</span> str(gmpy2.is_prime(num)).lower()</span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"What is the greatest common divisor"</span> <span class="keyword">in</span> s:</span><br><span class="line">		num1 = int(s.split(<span class="string">" "</span>)[<span class="number">7</span>])</span><br><span class="line">		num2 = int(s.split(<span class="string">" "</span>)[<span class="number">9</span>].replace(<span class="string">"?"</span>, <span class="string">""</span>))</span><br><span class="line">		<span class="keyword">return</span> gmpy2.gcd(num1, num2)</span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"Which planet is closest to the sun"</span> <span class="keyword">in</span> s:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Mercury"</span></span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"What is the capital of Germany"</span> <span class="keyword">in</span> s:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Berlin"</span></span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"How many planets are between Earth and the Sun?"</span> <span class="keyword">in</span> s:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"2"</span></span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"How many strings does a violin have?"</span> <span class="keyword">in</span> s:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"4"</span></span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"What is the tallest mountain on Earth?"</span> <span class="keyword">in</span> s:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Mount Everest"</span></span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"What year is it?"</span> <span class="keyword">in</span> s:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"2018"</span></span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"What color is the sky?"</span> <span class="keyword">in</span> s:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Blue"</span></span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"Who directed the movie Jaws?"</span> <span class="keyword">in</span> s:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Steven Spielberg"</span></span><br><span class="line">	<span class="keyword">elif</span> <span class="string">"What is the capital of Hawaii?"</span> <span class="keyword">in</span> s:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Honolulu"</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">print</span> s</span><br><span class="line"></span><br><span class="line">s = requests.Session()</span><br><span class="line">content = s.get(<span class="string">"https://43xa7xhkaj0cd8c-anticaptcha.labs.icec.tf/"</span>).text</span><br><span class="line">soup = BeautifulSoup(content, <span class="string">'html.parser'</span>)</span><br><span class="line"></span><br><span class="line">td_tags = soup.find_all(<span class="string">"td"</span>)</span><br><span class="line">answer = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(td_tags), <span class="number">2</span>):</span><br><span class="line">	answer.append(str(solveQuestion(td_tags[i].string)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> s.post(<span class="string">"https://43xa7xhkaj0cd8c-anticaptcha.labs.icec.tf/"</span>, data=&#123;<span class="string">'answer'</span>:answer&#125;).text[:<span class="number">2000</span>]</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://catpawn.github.io/2018/09/14/IceCTF2018-Anticaptcha/" data-id="cjm1zyku6000a1ww5kzqw78l4" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/14/IceCTF2018-HardShells/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          IceCTF2018-HardShells
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/14/IceCTF2018-Pokeamango/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">IceCTF2018-Pokeamango</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/14/IceCTF2018-Drumbone/">IceCTF2018-Drumbone</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/14/IceCTF2018-Lost-in-the-forest/">IceCTF2018-Lost-in-the-forest</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/14/IceCTF2018-HardShells/">IceCTF2018-HardShells</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/14/IceCTF2018-Anticaptcha/">IceCTF2018-Anticaptcha</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/14/IceCTF2018-Pokeamango/">IceCTF2018-Pokeamango</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CatPawn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
